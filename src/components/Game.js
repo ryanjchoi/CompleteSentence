@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-02 06:48:18
+* @Last Modified time: 2018-04-02 07:31:36
 */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -53,18 +53,21 @@ class Game extends React.Component {
         };
     }
 
-    getMergeSelected = () => {
-        const mergeSelected = this.state.selectedIds.reduce((acc, curr) => {
+    getMergeSelected = (nextState) => {
+        if(!nextState) {
+            nextState = this.state;
+        }
+
+        const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
             return `${acc} ${this.shuffledWords[curr]}`;
         }, '');
+
         return mergeSelected.trim();
     };
 
     // gameStatus: PLAYING, WON, LOST
     calcGameStatus = (nextState) => {
-        const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
-            return `${acc} ${this.shuffledWords[curr]}`.trim();
-        }, '');
+        const mergeSelected = this.getMergeSelected(nextState);
         console.log("mergeSelected: " + mergeSelected);
 
         if (nextState.remainingSeconds === 0) {
