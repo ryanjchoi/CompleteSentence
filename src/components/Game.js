@@ -2,10 +2,10 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-02 07:35:51
+* @Last Modified time: 2018-04-02 07:57:17
 */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
@@ -15,6 +15,7 @@ class Game extends React.Component {
         sentence: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
         initialSeconds: PropTypes.number.isRequired,
+        onPlayAgain: PropTypes.func.isRequired,
     };
 
     state = {
@@ -57,16 +58,12 @@ class Game extends React.Component {
         };
     }
 
-    getMergeSelected = (nextState) => {
-        if(!nextState) {
-            nextState = this.state;
-        }
-
+    getMergeSelected = (nextState = this.state) => {
         const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
-            return `${acc} ${this.shuffledWords[curr]}`;
+            return `${acc} ${this.shuffledWords[curr]}`.trim();
         }, '');
 
-        return mergeSelected.trim();
+        return mergeSelected;
     };
 
     // gameStatus: PLAYING, WON, LOST
@@ -119,6 +116,9 @@ class Game extends React.Component {
                         />
                     )}
                 </View>
+                {this.gameStatus !== 'PLAYING' && (
+                    <Button title="Play Again" onPress={this.props.onPlayAgain} />
+                )}
                 <Text>{this.state.remainingSeconds}</Text>
             </View>
         )
