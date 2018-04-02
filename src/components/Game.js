@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-02 07:31:36
+* @Last Modified time: 2018-04-02 07:35:51
 */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -50,6 +50,10 @@ class Game extends React.Component {
             nextState.remainingSeconds === 0
         ) {
             this.gameStatus = this.calcGameStatus(nextState);
+
+            if (this.gameStatus !== 'PLAYING') {
+                clearInterval(this.intervalId);
+            }
         };
     }
 
@@ -68,7 +72,6 @@ class Game extends React.Component {
     // gameStatus: PLAYING, WON, LOST
     calcGameStatus = (nextState) => {
         const mergeSelected = this.getMergeSelected(nextState);
-        console.log("mergeSelected: " + mergeSelected);
 
         if (nextState.remainingSeconds === 0) {
             return 'LOST';
