@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-02 07:57:17
+* @Last Modified time: 2018-04-04 06:27:51
 */
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
@@ -34,7 +34,7 @@ class Game extends React.Component {
             this.setState((prevState) => {
                 return { remainingSeconds: prevState.remainingSeconds - 1 };
             }, () => {
-                if (this.state.remainingSeconds === 0) {
+                if (this.state.remainingSeconds <= 0) {
                     clearInterval(this.intervalId);
                 }
             });
@@ -59,9 +59,13 @@ class Game extends React.Component {
     }
 
     getMergeSelected = (nextState = this.state) => {
+        const defaultMessage = 'Please select words below.';
         const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
+            if(acc === defaultMessage) {
+                acc = "";
+            }
             return `${acc} ${this.shuffledWords[curr]}`.trim();
-        }, '');
+        },  defaultMessage);
 
         return mergeSelected;
     };
@@ -102,7 +106,7 @@ class Game extends React.Component {
                 <Text style={[styles.merged, styles[`STATUS_${gameStatus}`]]}>
                     {this.getMergeSelected()}
                 </Text>
-                <Text style={styles.author}>{this.props.author}</Text>
+                <Text style={styles.author}>- {this.props.author} -</Text>
                 <View style={styles.wordsContainer}>
                     {this.shuffledWords.map((randomWord, index) =>
                         <RandomWord
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
     sentence: {
         fontSize: 20,
         // backgroundColor: '#bbb',
-        color: '#eee',
+        color: '#ddd',
         marginHorizontal: 10,
         textAlign: 'center',
         marginTop: '10%',
