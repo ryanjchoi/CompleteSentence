@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-04 06:27:51
+* @Last Modified time: 2018-04-06 07:00:07
 */
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
@@ -10,18 +10,15 @@ import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
 
-class Game extends React.Component {
-    static propTypes = {
-        sentence: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        initialSeconds: PropTypes.number.isRequired,
-        onPlayAgain: PropTypes.func.isRequired,
-    };
+export default class Game extends React.Component {
+    constructor(props) {
+        super(props);
 
-    state = {
-        selectedIds: [],
-        remainingSeconds: this.props.initialSeconds,
-    };
+        this.state = {
+            selectedIds: [],
+            remainingSeconds: this.props.initialSeconds,
+        };
+    }
 
     gameStatus = 'PLAYING';
 
@@ -59,7 +56,7 @@ class Game extends React.Component {
     }
 
     getMergeSelected = (nextState = this.state) => {
-        const defaultMessage = 'Please select words below.';
+        const defaultMessage = 'Please select words below to complete a sentence.';
         const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
             if(acc === defaultMessage) {
                 acc = "";
@@ -129,6 +126,17 @@ class Game extends React.Component {
     }
 }
 
+Game.propTypes = {
+    sentence: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    initialSeconds: PropTypes.number.isRequired,
+    onPlayAgain: PropTypes.func.isRequired,
+};
+
+Game.defaultProps = {
+
+};
+
 const styles = StyleSheet.create({
     ccontainer: {
         backgroundColor: '#ddd',
@@ -177,5 +185,3 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
     },
 })
-
-export default Game;
