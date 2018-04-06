@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-06 16:44:46
+* @Last Modified time: 2018-04-06 17:09:04
 */
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
@@ -18,13 +18,11 @@ export default class Game extends React.Component {
             selectedIds: [],
             remainingSeconds: this.props.initialSeconds,
         };
+
+        this.gameStatus = 'PLAYING';
+        this.words = this.props.sentence.split(' ');
+        this.shuffledWords = shuffle(this.words);
     }
-
-    gameStatus = 'PLAYING';
-
-    words = this.props.sentence.split(' ');
-
-    shuffledWords = shuffle(this.words);
 
     componentDidMount() {
         this.intervalId = setInterval(() => {
@@ -58,7 +56,7 @@ export default class Game extends React.Component {
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
         const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
-            if(acc === defaultMessage) {
+            if (acc === defaultMessage) {
                 acc = "";
             }
             return `${acc} ${this.shuffledWords[curr]}`.trim();
@@ -139,7 +137,9 @@ Game.defaultProps = {
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
+        flexDirection: 'column',
+        // justifyContent: 'space-between',
     },
 
     sentence: {
