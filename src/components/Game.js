@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-06 07:00:07
+* @Last Modified time: 2018-04-06 16:22:10
 */
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
@@ -138,9 +138,8 @@ Game.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    ccontainer: {
-        backgroundColor: '#ddd',
-        flex: 1,
+    container: {
+
     },
 
     sentence: {
