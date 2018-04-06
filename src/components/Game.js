@@ -2,8 +2,9 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-06 17:09:04
+* @Last Modified time: 2018-04-06 17:15:15
 */
+
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
@@ -11,6 +12,7 @@ import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
 
 export default class Game extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -22,7 +24,7 @@ export default class Game extends React.Component {
         this.gameStatus = 'PLAYING';
         this.words = this.props.sentence.split(' ');
         this.shuffledWords = shuffle(this.words);
-    }
+    };
 
     componentDidMount() {
         this.intervalId = setInterval(() => {
@@ -51,7 +53,7 @@ export default class Game extends React.Component {
                 clearInterval(this.intervalId);
             }
         };
-    }
+    };
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
@@ -80,7 +82,7 @@ export default class Game extends React.Component {
         } else {
             return 'LOST';
         }
-    }
+    };
 
     isNumberSelected = (wordIndex) => {
         return this.state.selectedIds.indexOf(wordIndex) >= 0;
@@ -121,7 +123,7 @@ export default class Game extends React.Component {
                 <Text>{this.state.remainingSeconds}</Text>
             </View>
         )
-    }
+    };
 }
 
 Game.propTypes = {
@@ -181,4 +183,4 @@ const styles = StyleSheet.create({
     STATUS_LOST: {
         backgroundColor: 'red',
     },
-})
+});

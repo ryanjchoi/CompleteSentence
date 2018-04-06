@@ -2,24 +2,23 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-01 07:17:45
+* @Last Modified time: 2018-04-06 17:14:58
 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-class RandomWord extends React.Component {
-    static propTypes = {
-        id: PropTypes.number.isRequired,
-        word: PropTypes.string.isRequired,
-        isDisabled: PropTypes.bool.isRequired,
-        onPress: PropTypes.func.isRequired,
+export default class RandomWord extends React.Component {
+
+    constructor(props) {
+        super(props);
     };
 
     handlePress = () => {
         if (this.props.isDisabled) { return; }
         this.props.onPress(this.props.id);
-    }
+    };
 
     render() {
         return (
@@ -29,8 +28,19 @@ class RandomWord extends React.Component {
                 </Text>
             </TouchableOpacity>
         );
-    }
-}
+    };
+};
+
+RandomWord.propTypes = {
+    id: PropTypes.number.isRequired,
+    word: PropTypes.string.isRequired,
+    isDisabled: PropTypes.bool.isRequired,
+    onPress: PropTypes.func.isRequired,
+};
+
+RandomWord.defaultProps = {
+
+};
 
 const styles = StyleSheet.create({
     randomWord: {
@@ -45,6 +55,5 @@ const styles = StyleSheet.create({
     disabled: {
         opacity: 0.3,
     }
-})
+});
 
-export default RandomWord;
