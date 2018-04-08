@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-07 07:16:48
+* @Last Modified time: 2018-04-07 07:29:27
 */
 
 // hide a warning message in the bottom of the simulator
@@ -11,6 +11,7 @@ console.ignoredYellowBox = ['Remote debugger'];
 import React from 'react';
 import Game from './Game';
 import * as CONSTANTS from "./constants";
+import * as SENTENCES from "./sentences";
 
 export default class App extends React.Component {
 
@@ -18,24 +19,14 @@ export default class App extends React.Component {
         super(props);
     };
 
-    quote = CONSTANTS.quotes[Math.floor(Math.random() * CONSTANTS.quotes.length)];
+    quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
 
-    BELT = {
-        WHITE: 10,
-        YELLOW: 5,
-        GREEN: 3,
-        ORANGE: 2,
-        BLUE: 1.5,
-        RED: 1.3,
-        BLACK: 1,
-    }
-
-    currentBelt = this.BELT.YELLOW;
+    currentBelt = CONSTANTS.BELT.YELLOW;
 
     seconds = Math.ceil(this.quote.sentence.split(" ").length * this.currentBelt);
 
     getQuote = () => {
-        return CONSTANTS.quotes[Math.floor(Math.random() * CONSTANTS.quotes.length)];
+        return SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
     }
 
     state = {
