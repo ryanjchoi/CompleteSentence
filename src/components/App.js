@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-08 17:20:59
+* @Last Modified time: 2018-04-08 17:53:06
 */
 
 // hide a warning message in the bottom of the simulator
@@ -52,9 +52,16 @@ export default class App extends React.Component {
 
     loadNewQuote = () => {
         this.setState((prevState) => {
+
+            let quote = this.getQuote();
+            if(quote.sentence === prevState.quote.sentence) {
+                this.loadNewQuote();
+                return;
+            }
+
             return {
                 gameId: prevState.gameId + 1,
-                quote: this.getQuote(),
+                quote: quote,
             };
         });
     };
