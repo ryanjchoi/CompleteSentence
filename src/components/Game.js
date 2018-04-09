@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-07 06:41:57
+* @Last Modified time: 2018-04-09 06:42:12
 */
 
 import React from 'react';
@@ -95,12 +95,10 @@ export default class Game extends React.Component {
     };
 
     render() {
-        const gameStatus = this.gameStatus;
-
         return (
             <View style={styles.container}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
-                <Text style={[styles.merged, styles[`STATUS_${gameStatus}`]]}>
+                <Text style={[styles.merged, styles[`STATUS_${this.gameStatus}`]]}>
                     {this.getMergeSelected()}
                 </Text>
                 <Text style={styles.author}>- {this.props.author} -</Text>
@@ -111,7 +109,7 @@ export default class Game extends React.Component {
                             id={index}
                             word={randomWord}
                             isDisabled={
-                                this.isNumberSelected(index) || gameStatus !== 'PLAYING'
+                                this.isNumberSelected(index) || this.gameStatus !== 'PLAYING'
                             }
                             onPress={this.selectWord}
                         />
