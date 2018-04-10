@@ -7,6 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "hapi": "^17.3.1",
+    "mongodb": "^3.0.6",
     "react": "16.3.0",
     "react-native": "0.54.4"
   },
