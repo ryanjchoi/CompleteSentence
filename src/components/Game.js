@@ -2,11 +2,11 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-09 06:42:12
+* @Last Modified time: 2018-04-13 21:50:58
 */
 
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
@@ -120,6 +120,14 @@ export default class Game extends React.Component {
                 )}
                 <Button title="New Quote" onPress={this.props.onNewQuote} />
                 <Text>{this.state.remainingSeconds}</Text>
+                <View class="thumbsUpDown">
+                    <Image
+                        source={require('./icons8-thumbs-up-50.png')}
+                    />
+                    <Image
+                        source={require('./icons8-thumbs-down-50.png')}
+                    />
+                </View>
             </View>
         )
     };
@@ -182,5 +190,9 @@ const styles = StyleSheet.create({
     },
     STATUS_LOST: {
         backgroundColor: 'red',
+    },
+
+    thumbsUpDown: {
+
     },
 });
