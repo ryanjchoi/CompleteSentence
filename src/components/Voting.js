@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:40:44
+* @Last Modified time: 2018-04-15 20:43:36
 */
 
 import React from 'react';
@@ -15,27 +15,27 @@ export default class Voting extends React.Component {
         super(props);
     };
 
-    handleThumbsUp = () => {
-        console.warn("handleThumbsUp");
+    handleLike = () => {
+        console.warn("handleLike");
     };
 
-    handleThumbsDown = () => {
-        console.warn("handleThumbsDown");
+    handleDisike = () => {
+        console.warn("handleDisike");
     };
 
     render() {
         return (
             <View>
-                <TouchableHighlight onPress={this.handleThumbsUp}>
+                <TouchableHighlight onPress={this.handleLike}>
                     <Image
                         source={require('./icons8-thumbs-up-50.png')}
-                        style={this.thumbsUp}
+                        style={this.like}
                     />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.handleThumbsDown}>
+                <TouchableHighlight onPress={this.handleDisike}>
                     <Image
                         source={require('./icons8-thumbs-down-50.png')}
-                        style={this.thumbsDown}
+                        style={this.disike}
                     />
                 </TouchableHighlight>
             </View>
@@ -52,11 +52,11 @@ Voting.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    thumbsUpDown: {
+    likeDown: {
 
     },
 
-    thumbsUp: {
+    like: {
 
     },
 });

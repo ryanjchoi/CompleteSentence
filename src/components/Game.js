@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:40:43
+* @Last Modified time: 2018-04-15 20:43:38
 */
 
 import React from 'react';
@@ -121,7 +121,7 @@ export default class Game extends React.Component {
                 )}
                 <Button title="New Quote" onPress={this.props.onNewQuote} />
                 <Text>{this.state.remainingSeconds}</Text>
-                <View class="thumbsUpDown">
+                <View class="likeDown">
                     <Voting />
                 </View>
             </View>
