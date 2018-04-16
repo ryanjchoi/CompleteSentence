@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 12:29:40
+* @Last Modified time: 2018-04-16 12:42:39
 */
 
 import React from 'react';
@@ -31,19 +31,6 @@ export default class Voting extends React.Component {
 
     };
 
-    getStorageVote = async (key) => {
-        try {
-            let likeVote = parseInt(await AsyncStorage.getItem(key));
-            console.log("likeVote: " + likeVote);
-
-
-            // return likeVote;
-            return 1;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     increaseDisike = () => {
         let dislikeVote = 1;
 
@@ -54,43 +41,52 @@ export default class Voting extends React.Component {
 
     };
 
-    increaseLike = async () => {
+    updateVoting = async (key) => {
         var oldLikeVote;
         try {
-            oldLikeVote = parseInt(await AsyncStorage.getItem("likeVote"));
-            console.log("oldLikeVote: " + oldLikeVote);
-
+            oldLikeVote = parseInt(await AsyncStorage.getItem(key));
         } catch (error) {
             console.log(error);
         }
 
-        let likeVote = (oldLikeVote || parseInt(this.state.likeVote)) + 1;
-            console.log("likeVote: " + likeVote);
+        if (key === "likeVote") {
+            let likeVote = (oldLikeVote || parseInt(this.state.likeVote)) + 1;
+                console.log("likeVote: " + likeVote);
 
-        AsyncStorage.setItem("likeVote", likeVote.toString());
-        this.setState({
-            likeVote: likeVote
-        });
+            AsyncStorage.setItem("likeVote", likeVote.toString());
+            this.setState({
+                likeVote: likeVote
+            });
+        }
 
+        if (key === "dislikeVote") {
+            let likeVote = (oldLikeVote || parseInt(this.state.dislikeVote)) + 1;
+                console.log("dislikeVote: " + dislikeVote);
 
+            AsyncStorage.setItem("dislikeVote", dislikeVote.toString());
+            this.setState({
+                dislikeVote: dislikeVote
+            });
+        }
     };
 
     render() {
         return (
             <View>
-                <TouchableOpacity onPress={this.increaseLike}>
+                <TouchableOpacity onPress={() => this.updateVoting("likeVote")}>
                     <Image
                         source={require('./icons8-thumbs-up-50.png')}
                         style={this.like}
                     />
                 </TouchableOpacity>
                 <Text>"likeVote: " {this.state.likeVote}</Text>
-                <TouchableOpacity onPress={this.increaseDisike}>
+                <TouchableOpacity onPress={() => this.updateVoting("dilikeVote")}>
                     <Image
                         source={require('./icons8-thumbs-down-50.png')}
                         style={this.disike}
                     />
                 </TouchableOpacity>
+                <Text>"dislikeVote: " {this.state.dislikeVote}</Text>
             </View>
         );
     };
@@ -102,8 +98,8 @@ Voting.propTypes = {
 };
 
 Voting.defaultProps = {
-    likeVote: 0,
-    dislikeVote: 0,
+    // likeVote: 0,
+    // dislikeVote: 0,
 };
 
 const styles = StyleSheet.create({

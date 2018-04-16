@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-07 06:46:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 09:14:44
+* @Last Modified time: 2018-04-16 12:51:29
 */
 
 export const QUOTES = [
@@ -25,6 +25,10 @@ export const QUOTES = [
     {
         sentence: "No matter how much you suffer, you will always be victorious in the end if you never give up.",
         author: "Michelle H. Choi",
+    },
+    {
+        sentence: "I’ve failed over and over and over again in my life and that is why I succeed.",
+        author: "Michael Johnson",
     },
     {
         sentence: "Whether you think you can or you think you can’t, you’re right.",

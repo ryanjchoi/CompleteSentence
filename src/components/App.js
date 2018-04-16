@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-08 17:53:06
+* @Last Modified time: 2018-04-16 13:26:59
 */
 
 // hide a warning message in the bottom of the simulator
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.belt = this.getBelt();
+        this.beltSeconds = this.getBeltSeconds();
         this.quote = this.getQuote();
         this.seconds = this.getSeconds(this.quote.sentence);
 
@@ -29,19 +29,20 @@ export default class App extends React.Component {
         };
     };
 
-    getBelt() {
-        return CONSTANTS.BELT.YELLOW;
+    getBeltSeconds() {
+        return CONSTANTS.BELT_SECONDS.WHITE;
     };
 
     getQuote = () => {
         let quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
-        quote.seconds = this.getSeconds(quote.sentence)
+        quote.seconds = this.getSeconds(quote.sentence);
+        quote.wordCount = quote.sentence.split(" ").length;
 
         return quote;
     };
 
     getSeconds(sentence: String) {
-        return Math.ceil(sentence.split(" ").length * this.belt);
+        return Math.ceil(sentence.split(" ").length * this.beltSeconds);
     };
 
     resetGame = () => {
@@ -54,7 +55,10 @@ export default class App extends React.Component {
         this.setState((prevState) => {
 
             let quote = this.getQuote();
-            if(quote.sentence === prevState.quote.sentence) {
+            if (
+                quote.sentence === prevState.quote.sentence ||
+                quote.wordCount > CONSTANTS.BELT_MAX_WORDS.WHITE
+            ) {
                 this.loadNewQuote();
                 return;
             }
