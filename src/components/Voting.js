@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 09:12:50
+* @Last Modified time: 2018-04-16 12:29:40
 */
 
 import React from 'react';
@@ -31,52 +31,61 @@ export default class Voting extends React.Component {
 
     };
 
-    handleDisike = () => {
-        console.warn("handleDisike");
+    getStorageVote = async (key) => {
+        try {
+            let likeVote = parseInt(await AsyncStorage.getItem(key));
+            console.log("likeVote: " + likeVote);
 
-        let dislikeVote = "1";
 
-        AsyncStorage.setItem("dislikeVote", dislikeVote);
+            // return likeVote;
+            return 1;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    increaseDisike = () => {
+        let dislikeVote = 1;
+
+        AsyncStorage.setItem("dislikeVote", dislikeVote.toString());
         this.setState({
             dislikeVote: dislikeVote
         });
 
-        this.displayVote("dislikeVote");
     };
 
-    displayVote = async (key) => {
+    increaseLike = async () => {
+        var oldLikeVote;
         try {
-            let likeVote = await AsyncStorage.getItem(key);
-            // alert(likeVote);
+            oldLikeVote = parseInt(await AsyncStorage.getItem("likeVote"));
+            console.log("oldLikeVote: " + oldLikeVote);
+
         } catch (error) {
-            alert(error)
+            console.log(error);
         }
-    };
 
-    handleLike = () => {
-        console.warn("handleLike");
+        let likeVote = (oldLikeVote || parseInt(this.state.likeVote)) + 1;
+            console.log("likeVote: " + likeVote);
 
-        let likeVote = "1";
-
-        AsyncStorage.setItem("likeVote", likeVote);
+        AsyncStorage.setItem("likeVote", likeVote.toString());
         this.setState({
             likeVote: likeVote
         });
 
-        // this.displayVote("likeVote");
+
     };
 
     render() {
         return (
             <View>
-                <TouchableOpacity onPress={this.handleLike}>
+                <TouchableOpacity onPress={this.increaseLike}>
                     <Image
                         source={require('./icons8-thumbs-up-50.png')}
                         style={this.like}
                     />
                 </TouchableOpacity>
                 <Text>"likeVote: " {this.state.likeVote}</Text>
-                <TouchableOpacity onPress={this.handleDisike}>
+                <TouchableOpacity onPress={this.increaseDisike}>
                     <Image
                         source={require('./icons8-thumbs-down-50.png')}
                         style={this.disike}
@@ -88,8 +97,8 @@ export default class Voting extends React.Component {
 };
 
 Voting.propTypes = {
-    likeVote: PropTypes.string,
-    dislikeVote: PropTypes.string,
+    likeVote: PropTypes.number,
+    dislikeVote: PropTypes.number,
 };
 
 Voting.defaultProps = {
