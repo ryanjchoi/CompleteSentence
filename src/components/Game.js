@@ -2,14 +2,15 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-13 21:50:58
+* @Last Modified time: 2018-04-15 20:10:09
 */
 
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
+import LikeDislike from './LikeDislike';
 
 export default class Game extends React.Component {
 
@@ -121,12 +122,7 @@ export default class Game extends React.Component {
                 <Button title="New Quote" onPress={this.props.onNewQuote} />
                 <Text>{this.state.remainingSeconds}</Text>
                 <View class="thumbsUpDown">
-                    <Image
-                        source={require('./icons8-thumbs-up-50.png')}
-                    />
-                    <Image
-                        source={require('./icons8-thumbs-down-50.png')}
-                    />
+                    <LikeDislike />
                 </View>
             </View>
         )
@@ -190,9 +186,5 @@ const styles = StyleSheet.create({
     },
     STATUS_LOST: {
         backgroundColor: 'red',
-    },
-
-    thumbsUpDown: {
-
     },
 });
