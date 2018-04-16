@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:10:09
+* @Last Modified time: 2018-04-15 20:40:43
 */
 
 import React from 'react';
@@ -10,7 +10,7 @@ import { View, Text, Button, Image, StyleSheet, TouchableHighlight } from 'react
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
-import LikeDislike from './LikeDislike';
+import Voting from './Voting';
 
 export default class Game extends React.Component {
 
@@ -122,7 +122,7 @@ export default class Game extends React.Component {
                 <Button title="New Quote" onPress={this.props.onNewQuote} />
                 <Text>{this.state.remainingSeconds}</Text>
                 <View class="thumbsUpDown">
-                    <LikeDislike />
+                    <Voting />
                 </View>
             </View>
         )

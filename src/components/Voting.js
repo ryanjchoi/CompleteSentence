@@ -2,14 +2,14 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:10:22
+* @Last Modified time: 2018-04-15 20:40:44
 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Image, StyleSheet, TouchableHighlight } from 'react-native';
 
-export default class LikeDislike extends React.Component {
+export default class Voting extends React.Component {
 
     constructor(props) {
         super(props);
@@ -43,11 +43,11 @@ export default class LikeDislike extends React.Component {
     };
 };
 
-LikeDislike.propTypes = {
+Voting.propTypes = {
 
 };
 
-LikeDislike.defaultProps = {
+Voting.defaultProps = {
 
 };
 
