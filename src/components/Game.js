@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 21:36:30
+* @Last Modified time: 2018-04-16 08:42:45
 */
 
 import React from 'react';
@@ -12,7 +12,7 @@ import {
     Button,
     Image,
     StyleSheet,
-    TouchableHighlight
+    TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
@@ -109,7 +109,7 @@ export default class Game extends React.Component {
                 <Text style={[styles.merged, styles[`STATUS_${this.gameStatus}`]]}>
                     {this.getMergeSelected()}
                 </Text>
-                <Text style={styles.author}>- {this.props.author} -</Text>
+                <Text style={styles.author}>- {this.props.author}</Text>
                 <View style={styles.wordsContainer}>
                     {this.shuffledWords.map((randomWord, index) =>
                         <RandomWord

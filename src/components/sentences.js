@@ -2,14 +2,16 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-07 06:46:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 06:16:14
+* @Last Modified time: 2018-04-16 09:14:44
 */
 
 export const QUOTES = [
     {
         sentence: "Reading sparks the imagination.",
         author: "Ronald McDonald",
+        source: "",
         type: "quote",
+        category: "inspiration",
         voting: {
             like: 0,
             dislike: 0,
@@ -23,6 +25,14 @@ export const QUOTES = [
     {
         sentence: "No matter how much you suffer, you will always be victorious in the end if you never give up.",
         author: "Michelle H. Choi",
+    },
+    {
+        sentence: "Whether you think you can or you think you can’t, you’re right.",
+        author: "Charles Swindoll",
+    },
+    {
+        sentence: "Life is 10% what happens to me and 90% of how I react to it.",
+        author: "Henry Ford",
     },
     {
         sentence: "Routine, in an intelligent man, is a sign of ambition.",
