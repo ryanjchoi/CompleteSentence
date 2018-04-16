@@ -2,13 +2,19 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-07 06:46:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 21:38:18
+* @Last Modified time: 2018-04-16 06:16:14
 */
 
 export const QUOTES = [
     {
-        sentence: "Reading sparks imagination.",
-        author: "Annoymous",
+        sentence: "Reading sparks the imagination.",
+        author: "Ronald McDonald",
+        type: "quote",
+        voting: {
+            like: 0,
+            dislike: 0,
+        },
+        view: 1,
     },
     {
         sentence: "Learn from others success, also absorb from your failure.",
@@ -17,6 +23,14 @@ export const QUOTES = [
     {
         sentence: "No matter how much you suffer, you will always be victorious in the end if you never give up.",
         author: "Michelle H. Choi",
+    },
+    {
+        sentence: "Routine, in an intelligent man, is a sign of ambition.",
+        author: "W. H. Auden",
+    },
+    {
+        sentence: "Judge a man by his questions rather than his answers.",
+        author: "Pierre-Marc-Gaston",
     },
     {
         sentence: "Absorb from others success, also learn from your failure.",
