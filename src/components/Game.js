@@ -2,11 +2,18 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:43:38
+* @Last Modified time: 2018-04-15 21:36:30
 */
 
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+    View,
+    Text,
+    Button,
+    Image,
+    StyleSheet,
+    TouchableHighlight
+} from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
@@ -120,6 +127,7 @@ export default class Game extends React.Component {
                     <Button title="Play Again" onPress={this.props.onPlayAgain} />
                 )}
                 <Button title="New Quote" onPress={this.props.onNewQuote} />
+                <Button title="Reset" onPress={this.props.onPlayAgain} />
                 <Text>{this.state.remainingSeconds}</Text>
                 <View class="likeDown">
                     <Voting />

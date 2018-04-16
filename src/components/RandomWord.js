@@ -2,12 +2,16 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-06 17:14:58
+* @Last Modified time: 2018-04-15 21:11:50
 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+    Text,
+    StyleSheet,
+    TouchableOpacity
+} from 'react-native';
 
 export default class RandomWord extends React.Component {
 

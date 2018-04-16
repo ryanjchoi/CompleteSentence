@@ -2,12 +2,19 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 20:43:36
+* @Last Modified time: 2018-04-15 22:09:35
 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    TouchableHighlight,
+    AsyncStorage,
+} from 'react-native';
 
 export default class Voting extends React.Component {
 
@@ -15,12 +22,28 @@ export default class Voting extends React.Component {
         super(props);
     };
 
+    componentDidMount() {
+        AsyncStorage.getItem("vote").then((value) => {
+            this.setState({"vote": value});
+        });
+    };
+
+    getInitialState() {
+        return {};
+    };
+
     handleLike = () => {
         console.warn("handleLike");
+
+        AsyncStorage.setItem("vote", value = "like");
+        this.setState({"vote": value});
     };
 
     handleDisike = () => {
         console.warn("handleDisike");
+
+        AsyncStorage.setItem("vote", value = "dislike");
+        this.setState({"vote": value});
     };
 
     render() {
@@ -44,7 +67,7 @@ export default class Voting extends React.Component {
 };
 
 Voting.propTypes = {
-
+    vote: PropTypes.string.isRequired,
 };
 
 Voting.defaultProps = {
