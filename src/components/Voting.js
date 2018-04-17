@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 12:42:39
+* @Last Modified time: 2018-04-16 13:44:09
 */
 
 import React from 'react';
@@ -61,7 +61,6 @@ export default class Voting extends React.Component {
 
         if (key === "dislikeVote") {
             let likeVote = (oldLikeVote || parseInt(this.state.dislikeVote)) + 1;
-                console.log("dislikeVote: " + dislikeVote);
 
             AsyncStorage.setItem("dislikeVote", dislikeVote.toString());
             this.setState({
