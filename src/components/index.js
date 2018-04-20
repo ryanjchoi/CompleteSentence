@@ -2,73 +2,72 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-17 06:41:04
+* @Last Modified time: 2018-04-20 07:21:16
 */
 
-var MongoClient = require('mongodb').MongoClient,
-    Hapi = require('hapi');
+var MongoClient = require('mongodb').MongoClient;
+var Hapi = require('hapi');
 
 var url = 'mongodb://localhost:27017/learning_mongo'
 
-// var server = new Hapi.Server();
-// var server = new Hapi.Server({ port: 8080, host: 'localhost' });
-// server.connection({
-//     port:8080
-// })
+const server = Hapi.server({
+    host: 'localhost',
+    port: 8080,
+});
 
-// server.route( [
-//     // Get tour list
-//     {
-//         method: 'GET',
-//         path: '/api/tours',
-//         handler: function(request, reply) {
-//             collection.find().toArray((error, tours) => {
-//                 reply(tours);
-//             })
-//         }
-//     },
-//     // Add new tour
-//     {
-//         method: 'POST',
-//         path: '/api/tours',
-//         handler: function(request, reply) {
-//             reply ("Adding new tour");
-//         }
-//     },
-//     // Get a single tour
-//     {
-//         method: 'GET',
-//         path: '/api/tours/{name}',
-//         handler: function(request, reply) {
-//             reply ("Retrieving " + request.params.name);
-//         }
-//     },
-//     // Update a single tour
-//     {
-//         method: 'PUT',
-//         path: '/api/tours/{name}',
-//         handler: function(request, reply) {
-//             // request.payload variables
-//             reply ("Updating " + request.params.name);
-//         }
-//     },
-//     // Delete a single tour
-//     {
-//         method: 'DELETE',
-//         path: '/api/tours/{name}',
-//         handler: function(request, reply) {
-//             reply ("Deleting " + request.params.name).code(204);
-//         }
-//     },
-//     // Home page
-//     {
-//         method: 'GET',
-//         path: '/',
-//         handler: function(request, reply) {
-//             reply( "Hello world from Hapi/Mongo example.")
-//         }
-//     }
-// ])
+server.route( [
+    // Get tour list
+    {
+        method: 'GET',
+        path: '/api/tours',
+        handler: function(request, reply) {
+            collection.find().toArray((error, tours) => {
+                reply(tours);
+            })
+        }
+    },
+    // Add new tour
+    {
+        method: 'POST',
+        path: '/api/tours',
+        handler: function(request, reply) {
+            reply ("Adding new tour");
+        }
+    },
+    // Get a single tour
+    {
+        method: 'GET',
+        path: '/api/tours/{name}',
+        handler: function(request, reply) {
+            reply ("Retrieving " + request.params.name);
+        }
+    },
+    // Update a single tour
+    {
+        method: 'PUT',
+        path: '/api/tours/{name}',
+        handler: function(request, reply) {
+            // request.payload variables
+            reply ("Updating " + request.params.name);
+        }
+    },
+    // Delete a single tour
+    {
+        method: 'DELETE',
+        path: '/api/tours/{name}',
+        handler: function(request, reply) {
+            reply ("Deleting " + request.params.name).code(204);
+        }
+    },
+    // Home page
+    {
+        method: 'GET',
+        path: '/',
+        handler: function(request, reply) {
+            reply( "Hello world from Hapi/Mongo example.")
+        }
+    }
+])
 
 var findDocuments = function(database, callback) {
     const db = database.db("learning_mongo");
