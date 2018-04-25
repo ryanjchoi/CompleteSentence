@@ -7,12 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "hapi": "^17.3.1",
-    "mongodb": "^3.0.6",
+    "hapi": "^16.6.3",
+    "mongodb": "^2.2.35",
     "react": "16.3.0",
     "react-native": "0.54.4"
   },
   "devDependencies": {
+    "assert": "^1.4.1",
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
     "eslint-config-rallycoding": "^3.2.0",
