@@ -45,7 +45,6 @@ server.route([
     method: 'POST',
     path: '/api/v1/todolist',
     handler: function(request, reply) {
-        var newTask;
         var latest_task = Task.find().sort({'index':-1}).limit(1);
         latest_task.exec(function(err, task) {
             new_index = task[0]["index"] + 1;
