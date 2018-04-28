@@ -21,7 +21,7 @@ server.route([
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
-            reply('Hello world from hapi');
+            reply('Hello world from CompleteSentence');
         }
     },
 
@@ -95,10 +95,10 @@ server.route([
         }
     },
 
-    // Update single sentence
+    // Update single sentence by id
     {
         method: 'PUT',
-        path: '/api/v1/quotes/{id}',
+        path: '/api/v1/quotes/id/{id}',
         handler: function(request, reply) {
             var updateData = {
                 'sentence': request.payload.sentence,
@@ -115,9 +115,10 @@ server.route([
         }
     },
 
+    // Delete single sentence by id
     {
         method: 'DELETE',
-        path: '/api/v1/quotes/{id}',
+        path: '/api/v1/quotes/id/{id}',
         handler: function(request, reply) {
             Task.findOneAndRemove(
             {'_id': request.params.id},
