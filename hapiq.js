@@ -40,7 +40,7 @@ server.route([
         method: 'GET',
         path: '/api/v1/todolist/{author}',
         handler: function(request, reply) {
-            var result = Task.findOne({"author":request.params.author});
+            var result = Task.find({'author':request.params.author});
             result.exec(function(err, quote) {
                 if (quote) {
                     reply(quote);
@@ -68,14 +68,14 @@ server.route([
     // Update single sentence
     {
         method: 'PUT',
-        path: '/api/v1/todolist/{author}',
+        path: '/api/v1/todolist/{id}',
         handler: function(request, reply) {
             var updateData = {
                 'sentence': request.payload.sentence,
                 'author': request.params.author
             }
             Task.findOneAndUpdate(
-                {'author': request.params.author},
+                {'_id': request.params.id},
                 updateData,
                 {new:true},
                 function(err, doc) {
@@ -87,10 +87,10 @@ server.route([
 
     {
         method: 'DELETE',
-        path: '/api/v1/todolist/{author}',
+        path: '/api/v1/todolist/{id}',
         handler: function(request, reply) {
             Task.findOneAndRemove(
-            {author:request.params.author},
+            {'_id': request.params.id},
             function(err, response) {
                 reply().code(204);
             });
