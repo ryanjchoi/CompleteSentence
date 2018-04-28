@@ -14,6 +14,8 @@ var Task = mongoose.model('quotes', taskSchema)
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 
+var LIMIT = 25;
+
 server.route([
     {
         method: 'GET',
@@ -28,19 +30,47 @@ server.route([
         method: 'GET',
         path: '/api/v1/quotes',
         handler: function(request, reply) {
-            var result = Task.find().limit(50);
+            var result = Task.find().limit(LIMIT);
             result.exec(function(err, tasks) {
                 reply(tasks);
             })
         }
     },
 
-    // Get single quote
+    // Get quotes by author
     {
         method: 'GET',
-        path: '/api/v1/quotes/{author}',
+        path: '/api/v1/quotes/author/{author}',
         handler: function(request, reply) {
-            var result = Task.find({'author':request.params.author});
+            var author = request.params.author;
+            if (author.length < 3) {
+                //TODO: add some logic here
+            }
+            var result = Task.find({
+                'author': {$regex: new RegExp(author)}
+            }).limit(LIMIT);
+            result.exec(function(err, quote) {
+                if (quote) {
+                    reply(quote);
+                } else {
+                    reply().code(404);
+                }
+            })
+        }
+    },
+
+    // Get quotes by keyword
+    {
+        method: 'GET',
+        path: '/api/v1/quotes/sentence/{keyword}',
+        handler: function(request, reply) {
+            var keyword = request.params.keyword;
+            if(keyword.length < 3) {
+                //TODO: add some logic here
+            }
+            var result = Task.find({
+                'sentence': {$regex: new RegExp(keyword)}
+            }).limit(LIMIT);
             result.exec(function(err, quote) {
                 if (quote) {
                     reply(quote);
