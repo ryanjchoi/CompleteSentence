@@ -1,16 +1,15 @@
 var Hapi = require('hapi');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/CompleteSentence');
 var db = mongoose.connection;
 
 var taskSchema = mongoose.Schema({
-    task: String,
-    owner: String,
-    index: Number
+    author: String,
+    sentence: String
 });
 
-var Task = mongoose.model('Task', taskSchema)
+var Task = mongoose.model('quotes', taskSchema)
 
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
@@ -21,7 +20,7 @@ server.route([
     method: 'GET',
     path: '/api/v1/todolist',
     handler: function(request, reply) {
-        var result = Task.find().sort({'index': -1}).limit(10);
+        var result = Task.find().limit(2);
         result.exec(function(err, tasks) {
             reply(tasks);
         })
@@ -32,48 +31,43 @@ server.route([
     method: 'POST',
     path: '/api/v1/todolist',
     handler: function(request, reply) {
-        var latest_task = Task.find().sort({'index':-1}).limit(1);
-        latest_task.exec(function(err, task) {
-            new_index = task[0]["index"] + 1;
-            newTask = new Task({
-                'task': request.payload.task,
-                'owner': request.payload.owner,
-                'index': new_index
-            });
-        })
+        var newTask = new Task({
+            'author': request.payload.author,
+            'sentence': request.payload.sentence
+        });
         newTask.save(function(err, newTask) {
             reply(newTask).code(201)
         })
     }
   },
 
-  // Get single task
+  // Get single quote
   {
     method: 'GET',
-    path: '/api/v1/todolist/{index}',
+    path: '/api/v1/todolist/{author}',
     handler: function(request, reply) {
-      var result = Task.findOne({"index":request.params.index});
-      result.exec(function(err, task) {
-          if (task) {
-           reply(task);
+      var result = Task.findOne({"author":request.params.author});
+      result.exec(function(err, quote) {
+          if (quote) {
+           reply(quote);
           } else {
             reply().code(404);
           }
       })
     }
   },
-  // Update single task
+
+  // Update single sentence
   {
     method: 'PUT',
-    path: '/api/v1/todolist/{index}',
+    path: '/api/v1/todolist/{author}',
     handler: function(request, reply) {
         var updateData = {
-            'task': request.payload.task,
-            'owner': request.payload.owner,
-            'index': request.params.index
+            'sentence': request.payload.sentence,
+            'author': request.params.author
         }
         Task.findOneAndUpdate(
-            {'index': request.params.index},
+            {'author': request.params.author},
             updateData,
             {new:true},
             function(err, doc) {
@@ -82,11 +76,12 @@ server.route([
         )
     }
   },
+
   {
     method: 'DELETE',
-    path: '/api/v1/todolist/{index}',
+    path: '/api/v1/todolist/{author}',
     handler: function(request, reply) {
-        Task.findOneAndRemove({index:request.params.index}, function(err, response) {
+        Task.findOneAndRemove({author:request.params.author}, function(err, response) {
             reply().code(204);
         });
     }
