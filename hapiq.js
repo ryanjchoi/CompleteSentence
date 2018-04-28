@@ -26,9 +26,9 @@ server.route([
     // Get ToDo List
     {
         method: 'GET',
-        path: '/api/v1/todolist',
+        path: '/api/v1/quotes',
         handler: function(request, reply) {
-            var result = Task.find().limit(3);
+            var result = Task.find().limit(50);
             result.exec(function(err, tasks) {
                 reply(tasks);
             })
@@ -38,7 +38,7 @@ server.route([
     // Get single quote
     {
         method: 'GET',
-        path: '/api/v1/todolist/{author}',
+        path: '/api/v1/quotes/{author}',
         handler: function(request, reply) {
             var result = Task.find({'author':request.params.author});
             result.exec(function(err, quote) {
@@ -53,7 +53,7 @@ server.route([
 
     {
         method: 'POST',
-        path: '/api/v1/todolist',
+        path: '/api/v1/quotes',
         handler: function(request, reply) {
             var newTask = new Task({
                 'author': request.payload.author,
@@ -68,7 +68,7 @@ server.route([
     // Update single sentence
     {
         method: 'PUT',
-        path: '/api/v1/todolist/{id}',
+        path: '/api/v1/quotes/{id}',
         handler: function(request, reply) {
             var updateData = {
                 'sentence': request.payload.sentence,
@@ -87,7 +87,7 @@ server.route([
 
     {
         method: 'DELETE',
-        path: '/api/v1/todolist/{id}',
+        path: '/api/v1/quotes/{id}',
         handler: function(request, reply) {
             Task.findOneAndRemove(
             {'_id': request.params.id},
