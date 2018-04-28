@@ -1,3 +1,10 @@
+/*
+* @Author: Ryan Choi
+* @Date:   2018-04-15 20:48:15
+* @Last Modified by:   Ryan Choi
+* @Last Modified time: 2018-04-28 07:33:03
+*/
+
 var Hapi = require('hapi');
 var mongoose = require('mongoose');
 
@@ -14,7 +21,7 @@ var Task = mongoose.model('quotes', taskSchema)
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 
-var LIMIT = 25;
+var LIMIT = 5;
 
 server.route([
     {
@@ -48,7 +55,7 @@ server.route([
             }
             var result = Task.find({
                 'author': {$regex: new RegExp(author)}
-            }).limit(LIMIT);
+            }).sort({'author': 1}).limit(LIMIT);
             result.exec(function(err, quote) {
                 if (quote) {
                     reply(quote);
@@ -132,3 +139,4 @@ server.route([
 server.start(function(err) {
     console.log('Hapi is listening to http://localhost:3000');
 });
+
