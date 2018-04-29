@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 21:13:02
+* @Last Modified time: 2018-04-28 21:42:45
 */
 
 // hide a warning message in the bottom of the simulator
@@ -26,34 +26,45 @@ export default class App extends React.Component {
 
     componentWillMount() {
         this.beltSeconds = this.getBeltSeconds();
-        this.quote = this.getQuote();
+        let quote = this.getQuote();
 
         this.setState({
-            quote: this.quote,
+            quote: quote,
         });
+
+        this.fetchFirst();
     };
 
     getBeltSeconds() {
         return CONSTANTS.BELT_SECONDS.WHITE;
     };
 
-    getQuote = () => {
-        this.fetchFirst();
-
-        let quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
+    getQuote = (result) => {
+        let quote = {};
+        if (result === undefined) {
+            console.log("Ryan1")
+            quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
+        } else {
+            console.log("Ryan2")
+            quote = result[Math.floor(Math.random() * result.length)];
+        }
         quote.wordCount = quote.sentence.split(" ").length;
 
         return quote;
     };
 
     fetchFirst() {
-        fetch('http://localhost:3000/api/v1/quotes').then(function (response) {
+        fetch('http://localhost:3000/api/v1/quotes').then( (response) => {
             // console.log("Ryan response.json() => ", response.json());
             return response.json();
-        }).then(function (result) {
+        }).then( (result) => {
             // console.log("Ryan result => ", result);
             // console.log("Ryan result[0].author => ", result[0].author);
-            return result;
+            let quote = this.getQuote(result);
+
+            this.setState({
+                quote: quote,
+            });
         });
     };
 
