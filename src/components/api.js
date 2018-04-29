@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 07:33:03
+* @Last Modified time: 2018-04-28 07:42:18
 */
 
 var Hapi = require('hapi');
@@ -11,24 +11,24 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/CompleteSentence');
 var db = mongoose.connection;
 
-var taskSchema = mongoose.Schema({
+var quoteSchema = mongoose.Schema({
     author: String,
     sentence: String
 });
 
-var Task = mongoose.model('quotes', taskSchema)
+var Task = mongoose.model('quotes', quoteSchema)
 
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 
-var LIMIT = 5;
+const LIMIT = 5;
 
 server.route([
     {
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
-            reply('Hello world from CompleteSentence');
+            reply('Welcome to CompleteSentence API. Please visit http://www.CompleteSentence.com/api for detail information.');
         }
     },
 
