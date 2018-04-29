@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 21:42:45
+* @Last Modified time: 2018-04-28 21:57:21
 */
 
 // hide a warning message in the bottom of the simulator
@@ -25,18 +25,12 @@ export default class App extends React.Component {
     };
 
     componentWillMount() {
-        this.beltSeconds = this.getBeltSeconds();
-        let quote = this.getQuote();
+        this.fetchFirst();
 
+        let quote = this.getQuote();
         this.setState({
             quote: quote,
         });
-
-        this.fetchFirst();
-    };
-
-    getBeltSeconds() {
-        return CONSTANTS.BELT_SECONDS.WHITE;
     };
 
     getQuote = (result) => {
@@ -48,7 +42,6 @@ export default class App extends React.Component {
             console.log("Ryan2")
             quote = result[Math.floor(Math.random() * result.length)];
         }
-        quote.wordCount = quote.sentence.split(" ").length;
 
         return quote;
     };
@@ -69,7 +62,10 @@ export default class App extends React.Component {
     };
 
     getSeconds(sentence: String) {
-        return Math.ceil(sentence.split(" ").length * this.beltSeconds);
+        if (sentence === undefined) {
+            return 0;
+        }
+        return Math.ceil(sentence.split(" ").length * CONSTANTS.BELT_SECONDS.WHITE);
     };
 
     resetGame = () => {
@@ -84,7 +80,7 @@ export default class App extends React.Component {
             let quote = this.getQuote();
             if (
                 quote.sentence === prevState.quote.sentence ||
-                quote.wordCount > CONSTANTS.BELT_MAX_WORDS.WHITE
+                quote.sentence.split(" ").length > CONSTANTS.BELT_MAX_WORDS.WHITE
             ) {
                 this.loadNewQuote();
                 return;
