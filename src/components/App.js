@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 20:59:09
+* @Last Modified time: 2018-04-28 21:13:02
 */
 
 // hide a warning message in the bottom of the simulator
@@ -21,7 +21,6 @@ export default class App extends React.Component {
         this.state = {
             gameId: 1,
             quote: {},
-            seconds: 0,
         };
     };
 
@@ -31,7 +30,6 @@ export default class App extends React.Component {
 
         this.setState({
             quote: this.quote,
-            seconds: this.getSeconds(this.quote.sentence),
         });
     };
 
@@ -40,12 +38,9 @@ export default class App extends React.Component {
     };
 
     getQuote = () => {
-        const quotes = this.fetchFirst();
-        console.log("Ryan quotes => ", quotes);
-        // let quote = quotes[Math.floor(Math.random() * quotes.length)];
+        this.fetchFirst();
 
         let quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
-        quote.seconds = this.getSeconds(quote.sentence);
         quote.wordCount = quote.sentence.split(" ").length;
 
         return quote;
@@ -56,8 +51,8 @@ export default class App extends React.Component {
             // console.log("Ryan response.json() => ", response.json());
             return response.json();
         }).then(function (result) {
-            console.log("Ryan result => ", result);
-            console.log("Ryan result[0].author => ", result[0].author);
+            // console.log("Ryan result => ", result);
+            // console.log("Ryan result[0].author => ", result[0].author);
             return result;
         });
     };
@@ -92,12 +87,14 @@ export default class App extends React.Component {
     };
 
     render() {
+        let seconds = this.getSeconds(this.state.quote.sentence);
+
         return (
             <Game
                 key={this.state.gameId}
                 sentence={this.state.quote.sentence}
                 author={this.state.quote.author}
-                initialSeconds={this.state.quote.seconds}
+                initialSeconds={seconds}
                 onPlayAgain={this.resetGame}
                 onNewQuote={this.loadNewQuote}
             />
