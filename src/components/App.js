@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 21:57:21
+* @Last Modified time: 2018-04-28 22:02:28
 */
 
 // hide a warning message in the bottom of the simulator
@@ -62,9 +62,6 @@ export default class App extends React.Component {
     };
 
     getSeconds(sentence: String) {
-        if (sentence === undefined) {
-            return 0;
-        }
         return Math.ceil(sentence.split(" ").length * CONSTANTS.BELT_SECONDS.WHITE);
     };
 
@@ -96,15 +93,17 @@ export default class App extends React.Component {
     render() {
         let seconds = this.getSeconds(this.state.quote.sentence);
 
+        const gameProps = {
+            key: this.state.gameId,
+            sentence: this.state.quote.sentence,
+            author: this.state.quote.author,
+            initialSeconds: seconds,
+            onPlayAgain: this.resetGame,
+            onNewQuote: this.loadNewQuote,
+        }
+
         return (
-            <Game
-                key={this.state.gameId}
-                sentence={this.state.quote.sentence}
-                author={this.state.quote.author}
-                initialSeconds={seconds}
-                onPlayAgain={this.resetGame}
-                onNewQuote={this.loadNewQuote}
-            />
+            <Game {...gameProps} />
         );
     }
 };
