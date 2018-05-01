@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:24:11
+* @Last Modified time: 2018-05-01 16:30:34
 */
 
 import React from 'react';
@@ -42,7 +42,7 @@ class App extends React.Component {
 
     render() {
         if (this.state.currentQuoteId) {
-            return <QuoteDetail quote={this.currentQuote()}></QuoteDetail>
+            return <QuoteDetail initialQuoteData={this.currentQuote()}></QuoteDetail>
         }
         if (this.state.quotes.length > 0) {
             return (

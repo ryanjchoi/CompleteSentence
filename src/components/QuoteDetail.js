@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:23:50
+* @Last Modified time: 2018-05-01 16:32:31
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -15,10 +15,14 @@ export default class QuoteDetail extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            quote: this.props.initialQuoteData,
+        }
     }
 
     render() {
-        const { quote } = this.props;
+        const { quote } = this.state;
         return (
             <View style={styles.quote}>
                 <Image style={styles.image}></Image>
