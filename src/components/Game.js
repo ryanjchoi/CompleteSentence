@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 08:42:45
+* @Last Modified time: 2018-04-28 22:15:06
 */
 
 import React from 'react';
@@ -30,7 +30,12 @@ export default class Game extends React.Component {
         };
 
         this.gameStatus = 'PLAYING';
-        this.words = this.props.sentence.split(' ');
+        try {
+            this.words = this.props.sentence.split(' ');
+        } catch (e) {
+            console.log(e)
+        }
+
         this.shuffledWords = shuffle(this.words);
     };
 

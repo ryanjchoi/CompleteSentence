@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 07:42:18
+* @Last Modified time: 2018-05-01 11:28:58
 */
 
 var Hapi = require('hapi');
@@ -21,7 +21,7 @@ var Task = mongoose.model('quotes', quoteSchema)
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 
-const LIMIT = 5;
+const LIMIT = 50;
 
 server.route([
     {
