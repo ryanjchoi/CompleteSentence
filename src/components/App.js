@@ -2,18 +2,20 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 14:25:16
+* @Last Modified time: 2018-05-01 16:24:11
 */
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ajax from '../ajax';
 import QuoteList from './QuoteList';
+import QuoteDetail from './QuoteDetail';
 
 class App extends React.Component {
 
     state = {
         quotes: [],
+        currentQuoteId: null,
     }
 
     constructor(props) {
@@ -26,17 +28,33 @@ class App extends React.Component {
         // console.log("Ryan quotes => ", quotes);
     }
 
+    setCurrentQuote = (quoteId) => {
+        this.setState({
+            currentQuoteId: quoteId,
+        });
+    }
+
+    currentQuote = () => {
+        return this.state.quotes.find(
+            (quote) => quote._id === this.state.currentQuoteId
+        );
+    };
+
     render() {
-        console.log("Ryan this.state.quotes.length => ", this.state.quotes.length);
+        if (this.state.currentQuoteId) {
+            return <QuoteDetail quote={this.currentQuote()}></QuoteDetail>
+        }
+        if (this.state.quotes.length > 0) {
+            return (
+                <QuoteList
+                    quotes = {this.state.quotes}
+                    onItemPress = {this.setCurrentQuote}
+                />
+            )
+        }
         return (
             <View style={styles.container}>
-                {
-                    this.state.quotes.length > 0 ? (
-                        <QuoteList quotes={this.state.quotes} />
-                    ) : (
-                        <Text style={styles.header}>CompleteSentence</Text>
-                    )
-                }
+                <Text style={styles.header}>CompleteSentence</Text>
             </View>
         );
     }

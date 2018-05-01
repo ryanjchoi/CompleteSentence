@@ -2,15 +2,17 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 14:27:25
+* @Last Modified time: 2018-05-01 16:25:07
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
+import QuoteItem from './QuoteItem';
 
 class QuoteList extends React.Component {
     static propTypes = {
         quotes: PropTypes.array.isRequired,
+        onItemPress: PropTypes.func.isRequired,
     }
 
     constructor(props) {
@@ -18,14 +20,15 @@ class QuoteList extends React.Component {
     }
 
     render() {
-        // console.log("Ryan this.props.quotes => ", this.props.quotes);
         return (
             <View style={styles.list}>
-                {
-                    this.props.quotes.map((quote) =>
-                        <Text key={quote._id}>{quote.sentence}</Text>
-                    )
-                }
+                <FlatList
+                    data = {this.props.quotes}
+                    renderItem = {({item}) => <QuoteItem
+                        quote={item}
+                        onPress={this.props.onItemPress}
+                    />}
+                />
             </View>
         );
     }
