@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-29 07:36:33
+* @Last Modified time: 2018-05-03 06:31:04
 */
 
 // hide a warning message in the bottom of the simulator
@@ -37,10 +37,10 @@ export default class App extends React.Component {
         let quote = {};
         if (result === undefined) {
             quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
-            console.log("Ryan1 quote => ", quote);
+            // console.log("Ryan1 quote => ", quote);
         } else {
             quote = result[Math.floor(Math.random() * result.length)];
-            console.log("Ryan2 quote => ", quote);
+            // console.log("Ryan2 quote => ", quote);
         }
 
         return quote;

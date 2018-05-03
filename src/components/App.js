@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:30:34
+* @Last Modified time: 2018-05-03 07:02:50
 */
 
 import React from 'react';
@@ -23,9 +23,8 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
-        const quotes = await ajax.fetchInitialDeals();
+        const quotes = await ajax.fetchInitialQuotes();
         this.setState({ quotes });
-        // console.log("Ryan quotes => ", quotes);
     }
 
     setCurrentQuote = (quoteId) => {

@@ -2,11 +2,13 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:32:31
+* @Last Modified time: 2018-05-03 07:01:36
 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image, StyleSheet } from 'react-native';
+
+import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
     static propTypes = {
@@ -21,6 +23,14 @@ export default class QuoteDetail extends React.Component {
         }
     }
 
+    async componentDidMount() {
+        const fullQuote = await ajax.fetchQuoteDetail(this.state.quote._id);
+        console.log("Ryan fullQuote => ", fullQuote);
+        this.setState({
+            quote: fullQuote,
+        });
+    }
+
     render() {
         const { quote } = this.state;
         return (
@@ -33,7 +43,7 @@ export default class QuoteDetail extends React.Component {
                         <Image style={styles.avata}></Image>
                     </View>
                 </View>
-                <Text>...</Text>
+                <Text>{quote._id}</Text>
             </View>
         );
     }
@@ -70,8 +80,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     avata: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         backgroundColor: '#ccc',
     },
 

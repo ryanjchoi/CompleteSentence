@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 11:28:58
+* @Last Modified time: 2018-05-03 06:32:24
 */
 
 var Hapi = require('hapi');
@@ -40,6 +40,25 @@ server.route([
             var result = Task.find().limit(LIMIT);
             result.exec(function(err, tasks) {
                 reply(tasks);
+            })
+        }
+    },
+
+    // Get quotes by id
+    {
+        method: 'GET',
+        path: '/api/v1/quotes/id/{id}',
+        handler: function(request, reply) {
+            var id = request.params.id;
+            var result = Task.findOne({
+                '_id': id
+            });
+            result.exec(function(err, quote) {
+                if (quote) {
+                    reply(quote);
+                } else {
+                    reply().code(404);
+                }
             })
         }
     },
