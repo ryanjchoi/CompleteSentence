@@ -2,17 +2,18 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-03 07:01:36
+* @Last Modified time: 2018-05-04 07:09:39
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
     static propTypes = {
-        quote: PropTypes.object.isRequired,
+        initialQuoteData: PropTypes.object.isRequired,
+        onBack: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -35,15 +36,21 @@ export default class QuoteDetail extends React.Component {
         const { quote } = this.state;
         return (
             <View style={styles.quote}>
-                <Image style={styles.image}></Image>
-                <View style={styles.info}>
-                    <Text style={styles.sentence}>{quote.sentence}</Text>
-                    <View style={styles.footer}>
-                        <Text style={styles.author}>- {quote.author}</Text>
-                        <Image style={styles.avata}></Image>
+                <TouchableOpacity onPress={this.props.onBack}>
+                    <Text style={styles.backlink}>Back</Text>
+                </TouchableOpacity>
+                <View style={styles.detail}>
+                    <Image style={styles.image}></Image>
+                    <View style={styles.info}>
+                        <Text style={styles.sentence}>{quote.sentence}</Text>
+                        <View style={styles.footer}>
+                            <Text style={styles.author}>- {quote.author}</Text>
+                            <Image style={styles.avata}></Image>
+                        </View>
                     </View>
+                    <Text>{quote._id}</Text>
                 </View>
-                <Text>{quote._id}</Text>
+
             </View>
         );
     }
@@ -53,6 +60,14 @@ const styles = StyleSheet.create({
     quote: {
         marginHorizontal: 12,
         marginTop: 50,
+    },
+    detail: {
+        borderColor: '#bbb',
+        borderWidth: 1,
+    },
+    backlink: {
+        marginBottom: 5,
+        color: '#22f',
     },
     image: {
         width: '100%',

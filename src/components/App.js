@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-03 07:02:50
+* @Last Modified time: 2018-05-04 07:01:05
 */
 
 import React from 'react';
@@ -16,22 +16,28 @@ class App extends React.Component {
     state = {
         quotes: [],
         currentQuoteId: null,
-    }
+    };
 
     constructor(props) {
         super(props);
-    }
+    };
 
     async componentDidMount() {
         const quotes = await ajax.fetchInitialQuotes();
         this.setState({ quotes });
-    }
+    };
+
+    unsetCurrentQuote = () => {
+        this.setState({
+            currentQuoteId: null,
+        });
+    };
 
     setCurrentQuote = (quoteId) => {
         this.setState({
             currentQuoteId: quoteId,
         });
-    }
+    };
 
     currentQuote = () => {
         return this.state.quotes.find(
@@ -41,7 +47,12 @@ class App extends React.Component {
 
     render() {
         if (this.state.currentQuoteId) {
-            return <QuoteDetail initialQuoteData={this.currentQuote()}></QuoteDetail>
+            return (
+                <QuoteDetail
+                    initialQuoteData={this.currentQuote()}
+                    onBack={this.unsetCurrentQuote}
+                />
+            )
         }
         if (this.state.quotes.length > 0) {
             return (
