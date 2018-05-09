@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-28 22:15:06
+* @Last Modified time: 2018-05-09 18:59:27
 */
 
 import React from 'react';
@@ -10,9 +10,7 @@ import {
     View,
     Text,
     Button,
-    Image,
-    StyleSheet,
-    TouchableOpacity
+    StyleSheet
 } from 'react-native';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
@@ -33,11 +31,11 @@ export default class Game extends React.Component {
         try {
             this.words = this.props.sentence.split(' ');
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
 
         this.shuffledWords = shuffle(this.words);
-    };
+    }
 
     componentDidMount() {
         this.intervalId = setInterval(() => {
@@ -49,11 +47,11 @@ export default class Game extends React.Component {
                 }
             });
         }, 1000);
-    };
+    }
 
     componentWillUnmount() {
         clearInterval(this.intervalId);
-    };
+    }
 
     componentWillUpdate(nextProps, nextState) {
         if (
@@ -65,8 +63,8 @@ export default class Game extends React.Component {
             if (this.gameStatus !== 'PLAYING') {
                 clearInterval(this.intervalId);
             }
-        };
-    };
+        }
+    }
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:25:06
+* @Last Modified time: 2018-05-09 19:00:53
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ export default class QuoteItem extends React.Component {
 
     constructor(props) {
         super(props);
-    };
+    }
 
     handlePress = () => {
         this.props.onPress(this.props.quote._id);
@@ -29,12 +29,12 @@ export default class QuoteItem extends React.Component {
                 style={styles.quote}
                 onPress={this.handlePress}
             >
-                <Image style={styles.image}></Image>
+                <Image style={styles.image} />
                 <View style={styles.info}>
                     <Text style={styles.sentence}>{quote.sentence}</Text>
                     <View style={styles.footer}>
                         <Text style={styles.author}>- {quote.author}</Text>
-                        <Image style={styles.avata}></Image>
+                        <Image style={styles.avata} />
                     </View>
 
                 </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     author: {
-        flex:2,
+        flex: 2,
         fontSize: 16,
         marginBottom: 5,
     },

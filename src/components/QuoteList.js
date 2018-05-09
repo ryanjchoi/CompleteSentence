@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-01 16:25:07
+* @Last Modified time: 2018-05-09 19:01:10
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -37,10 +37,10 @@ class QuoteList extends React.Component {
 // ...
 const styles = StyleSheet.create({
     list: {
-        backgroundColor: "#eee",
+        backgroundColor: '#eee',
         flex: 1,
         width: '100%',
-        paddingTop: 50,
+        // paddingTop: 50,
 
     }
 });

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-04 07:09:39
+* @Last Modified time: 2018-05-09 18:49:31
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -21,12 +21,12 @@ export default class QuoteDetail extends React.Component {
 
         this.state = {
             quote: this.props.initialQuoteData,
-        }
+        };
     }
 
     async componentDidMount() {
         const fullQuote = await ajax.fetchQuoteDetail(this.state.quote._id);
-        console.log("Ryan fullQuote => ", fullQuote);
+        console.log('Ryan fullQuote => ', fullQuote);
         this.setState({
             quote: fullQuote,
         });
@@ -40,17 +40,16 @@ export default class QuoteDetail extends React.Component {
                     <Text style={styles.backlink}>Back</Text>
                 </TouchableOpacity>
                 <View style={styles.detail}>
-                    <Image style={styles.image}></Image>
+                    <Image style={styles.image} />
                     <View style={styles.info}>
                         <Text style={styles.sentence}>{quote.sentence}</Text>
                         <View style={styles.footer}>
                             <Text style={styles.author}>- {quote.author}</Text>
-                            <Image style={styles.avata}></Image>
+                            <Image style={styles.avata} />
                         </View>
                     </View>
                     <Text>{quote._id}</Text>
                 </View>
-
             </View>
         );
     }
@@ -59,7 +58,6 @@ export default class QuoteDetail extends React.Component {
 const styles = StyleSheet.create({
     quote: {
         marginHorizontal: 12,
-        marginTop: 50,
     },
     detail: {
         borderColor: '#bbb',
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     author: {
-        flex:2,
+        flex: 2,
         fontSize: 16,
         marginBottom: 5,
     },
