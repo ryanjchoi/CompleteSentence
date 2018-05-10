@@ -2,23 +2,23 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-03 06:32:24
+* @Last Modified time: 2018-05-10 06:53:50
 */
 
-var Hapi = require('hapi');
-var mongoose = require('mongoose');
+const Hapi = require('hapi');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/CompleteSentence');
-var db = mongoose.connection;
+// const db = mongoose.connection;
 
-var quoteSchema = mongoose.Schema({
+const quoteSchema = mongoose.Schema({
     author: String,
     sentence: String
 });
 
-var Task = mongoose.model('quotes', quoteSchema)
+const Task = mongoose.model('quotes', quoteSchema);
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection({ port: 3000 });
 
 const LIMIT = 50;
@@ -27,7 +27,7 @@ server.route([
     {
         method: 'GET',
         path: '/',
-        handler: function(request, reply) {
+        handler: (request, reply) => {
             reply('Welcome to CompleteSentence API. Please visit http://www.CompleteSentence.com/api for detail information.');
         }
     },
@@ -36,11 +36,11 @@ server.route([
     {
         method: 'GET',
         path: '/api/v1/quotes',
-        handler: function(request, reply) {
-            var result = Task.find().limit(LIMIT);
-            result.exec(function(err, tasks) {
+        handler: (request, reply) => {
+            const result = Task.find().limit(LIMIT);
+            result.exec((err, tasks) => {
                 reply(tasks);
-            })
+            });
         }
     },
 
@@ -48,18 +48,18 @@ server.route([
     {
         method: 'GET',
         path: '/api/v1/quotes/id/{id}',
-        handler: function(request, reply) {
-            var id = request.params.id;
-            var result = Task.findOne({
+        handler: (request, reply) => {
+            const id = request.params.id;
+            const result = Task.findOne({
                 '_id': id
             });
-            result.exec(function(err, quote) {
+            result.exec((err, quote) => {
                 if (quote) {
                     reply(quote);
                 } else {
                     reply().code(404);
                 }
-            })
+            });
         }
     },
 
@@ -67,21 +67,21 @@ server.route([
     {
         method: 'GET',
         path: '/api/v1/quotes/author/{author}',
-        handler: function(request, reply) {
-            var author = request.params.author;
+        handler: (request, reply) => {
+            const author = request.params.author;
             if (author.length < 3) {
                 //TODO: add some logic here
             }
-            var result = Task.find({
-                'author': {$regex: new RegExp(author)}
-            }).sort({'author': 1}).limit(LIMIT);
-            result.exec(function(err, quote) {
+            const result = Task.find({
+                author: { $regex: new RegExp(author) }
+            }).sort({ author: 1 }).limit(LIMIT);
+            result.exec((err, quote) => {
                 if (quote) {
                     reply(quote);
                 } else {
                     reply().code(404);
                 }
-            })
+            });
         }
     },
 
@@ -89,35 +89,35 @@ server.route([
     {
         method: 'GET',
         path: '/api/v1/quotes/sentence/{keyword}',
-        handler: function(request, reply) {
-            var keyword = request.params.keyword;
-            if(keyword.length < 3) {
+        handler: (request, reply) => {
+            const keyword = request.params.keyword;
+            if (keyword.length < 3) {
                 //TODO: add some logic here
             }
-            var result = Task.find({
-                'sentence': {$regex: new RegExp(keyword)}
+            const result = Task.find({
+                sentence: { $regex: new RegExp(keyword) }
             }).limit(LIMIT);
-            result.exec(function(err, quote) {
+            result.exec((err, quote) => {
                 if (quote) {
                     reply(quote);
                 } else {
                     reply().code(404);
                 }
-            })
+            });
         }
     },
 
     {
         method: 'POST',
         path: '/api/v1/quotes',
-        handler: function(request, reply) {
-            var newTask = new Task({
-                'author': request.payload.author,
-                'sentence': request.payload.sentence
+        handler: (request, reply) => {
+            const newTask = new Task({
+                author: request.payload.author,
+                sentence: request.payload.sentence
             });
-            newTask.save(function(err, newTask) {
-                reply(newTask).code(201)
-            })
+            newTask.save((err, task) => {
+                reply(task).code(201);
+            });
         }
     },
 
@@ -125,19 +125,19 @@ server.route([
     {
         method: 'PUT',
         path: '/api/v1/quotes/id/{id}',
-        handler: function(request, reply) {
-            var updateData = {
-                'sentence': request.payload.sentence,
-                'author': request.params.author
-            }
+        handler: (request, reply) => {
+            const updateData = {
+                sentence: request.payload.sentence,
+                author: request.params.author
+            };
             Task.findOneAndUpdate(
-                {'_id': request.params.id},
+                { '_id': request.params.id },
                 updateData,
-                {new:true},
-                function(err, doc) {
+                { new: true },
+                (err, doc) => {
                     reply(doc);
                 }
-            )
+            );
         }
     },
 
@@ -145,17 +145,17 @@ server.route([
     {
         method: 'DELETE',
         path: '/api/v1/quotes/id/{id}',
-        handler: function(request, reply) {
+        handler: (request, reply) => {
             Task.findOneAndRemove(
-            {'_id': request.params.id},
-            function(err, response) {
+            { '_id': request.params.id },
+            (err, response) => {
                 reply().code(204);
             });
         }
     }
 ]);
 
-server.start(function(err) {
+server.start((err) => {
     console.log('Hapi is listening to http://localhost:3000');
 });
 
