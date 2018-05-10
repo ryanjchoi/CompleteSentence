@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 18:54:55
+* @Last Modified time: 2018-05-10 06:37:54
 */
 
 import React from 'react';
@@ -64,12 +64,18 @@ class App extends React.Component {
                 </View>
             );
         }
-        if (this.state.quotes.length > 0) {
+
+        const quotesToDisplay =
+            this.state.quotesFormSearch.length > 0
+                ? this.state.quotesFormSearch
+                : this.state.quotes;
+
+        if (quotesToDisplay.length > 0) {
             return (
                 <View style={styles.main}>
                     <SearchBar searchQuotes={this.searchQuotes} />
                     <QuoteList
-                        quotes={this.state.quotes}
+                        quotes={quotesToDisplay}
                         onItemPress={this.setCurrentQuote}
                     />
                 </View>

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 18:57:21
+* @Last Modified time: 2018-05-09 19:09:59
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ export default class SearchBar extends React.Component {
 
         this.state = {
             searchTerm: '',
-        }
+        };
     }
 
     debouncedSearchQuotes = debounce(this.props.searchQuotes, 300);
