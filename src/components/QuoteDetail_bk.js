@@ -2,14 +2,12 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-12 06:40:46
+* @Last Modified time: 2018-05-12 06:40:19
 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import Game from './Game';
-import * as CONSTANTS from "./constants";
 import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
@@ -22,7 +20,6 @@ export default class QuoteDetail extends React.Component {
         super(props);
 
         this.state = {
-            gameId: 1,
             quote: this.props.initialQuoteData,
         };
     }
@@ -35,46 +32,25 @@ export default class QuoteDetail extends React.Component {
         });
     }
 
-    resetGame = () => {
-        this.setState((prevState) => {
-            return { gameId: prevState.gameId + 1};
-        });
-    };
-
-    loadNewQuote = () => {
-        this.setState((prevState) => {
-
-            let quote = this.state.quote;
-
-            if (
-                quote.sentence === prevState.quote.sentence ||
-                quote.sentence.split(" ").length > CONSTANTS.BELT_MAX_WORDS.WHITE
-            ) {
-                // this.loadNewQuote();
-                return;
-            }
-
-            return {
-                gameId: prevState.gameId + 1,
-                quote: quote,
-            };
-        });
-    };
-
     render() {
         const { quote } = this.state;
-
-        const gameProps = {
-            key: this.state.gameId,
-            sentence: quote.sentence,
-            author: quote.author,
-            initialSeconds: 30,
-            onPlayAgain: this.resetGame,
-            onNewQuote: this.loadNewQuote,
-        }
-
         return (
-            <Game {...gameProps} />
+            <View style={styles.quote}>
+                <TouchableOpacity onPress={this.props.onBack}>
+                    <Text style={styles.backlink}>Back</Text>
+                </TouchableOpacity>
+                <View style={styles.detail}>
+                    <Image style={styles.image} />
+                    <View style={styles.info}>
+                        <Text style={styles.sentence}>{quote.sentence}</Text>
+                        <View style={styles.footer}>
+                            <Text style={styles.author}>- {quote.author}</Text>
+                            <Image style={styles.avata} />
+                        </View>
+                    </View>
+                    <Text>{quote._id}</Text>
+                </View>
+            </View>
         );
     }
 }
