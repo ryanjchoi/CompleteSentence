@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-10 06:37:54
+* @Last Modified time: 2018-05-12 06:59:26
 */
 
 import React from 'react';
@@ -58,6 +58,7 @@ class App extends React.Component {
             return (
                 <View style={styles.main}>
                     <QuoteDetail
+                        quotes={this.state.quotes}
                         initialQuoteData={this.currentQuote()}
                         onBack={this.unsetCurrentQuote}
                     />

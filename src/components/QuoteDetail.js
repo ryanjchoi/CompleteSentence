@@ -2,11 +2,17 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-12 06:40:46
+* @Last Modified time: 2018-05-12 07:00:06
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 
 import Game from './Game';
 import * as CONSTANTS from "./constants";
@@ -14,6 +20,7 @@ import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
     static propTypes = {
+        quotes: PropTypes.array.isRequired,
         initialQuoteData: PropTypes.object.isRequired,
         onBack: PropTypes.func.isRequired,
     };
@@ -22,7 +29,8 @@ export default class QuoteDetail extends React.Component {
         super(props);
 
         this.state = {
-            gameId: 1,
+            quotes: this.props.quotes,
+            gameId: 0,
             quote: this.props.initialQuoteData,
         };
     }
@@ -45,6 +53,7 @@ export default class QuoteDetail extends React.Component {
         this.setState((prevState) => {
 
             let quote = this.state.quote;
+            console.log("Ryan quote => ", quote);
 
             if (
                 quote.sentence === prevState.quote.sentence ||
