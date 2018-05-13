@@ -2,11 +2,17 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 19:00:53
+* @Last Modified time: 2018-05-13 07:25:30
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 
 export default class QuoteItem extends React.Component {
     static propTypes = {

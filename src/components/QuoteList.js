@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 19:01:10
+* @Last Modified time: 2018-05-13 07:21:54
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -23,11 +23,13 @@ class QuoteList extends React.Component {
         return (
             <View style={styles.list}>
                 <FlatList
-                    data = {this.props.quotes}
-                    renderItem = {({item}) => <QuoteItem
-                        quote={item}
-                        onPress={this.props.onItemPress}
-                    />}
+                    data={this.props.quotes}
+                    renderItem={
+                        ({ item }) => <QuoteItem
+                            quote={item}
+                            onPress={this.props.onItemPress}
+                        />
+                    }
                 />
             </View>
         );
