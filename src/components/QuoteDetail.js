@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-12 07:00:06
+* @Last Modified time: 2018-05-15 07:13:50
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -49,11 +49,26 @@ export default class QuoteDetail extends React.Component {
         });
     };
 
+    getQuoteIndex = (quote) => {
+        let quotes = this.state.quotes;
+        return quotes.map(function(e) {
+            return e._id;
+        }).indexOf(quote._id);
+    }
+
     loadNewQuote = () => {
         this.setState((prevState) => {
-
+            let quotes = this.state.quotes;
             let quote = this.state.quote;
-            console.log("Ryan quote => ", quote);
+
+            if (this.qindex === undefined) {
+                this.qindex = this.getQuoteIndex(quote);
+            }
+
+            quote = quotes[++this.qindex];
+            this.setState({
+                quote: quote
+            });
 
             if (
                 quote.sentence === prevState.quote.sentence ||

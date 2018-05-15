@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-13 07:25:30
+* @Last Modified time: 2018-05-15 07:08:09
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,6 +16,7 @@ import {
 
 export default class QuoteItem extends React.Component {
     static propTypes = {
+        quotes: PropTypes.array.isRequired,
         quote: PropTypes.object.isRequired,
         onPress: PropTypes.func.isRequired,
     };
