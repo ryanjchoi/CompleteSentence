@@ -2,20 +2,19 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 08:28:33
+* @Last Modified time: 2018-05-18 08:38:03
 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
-    Image,
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
 
 import Game from './Game';
-import * as CONSTANTS from "./constants";
+import * as CONSTANTS from './constants';
 import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
@@ -43,22 +42,20 @@ export default class QuoteDetail extends React.Component {
         });
     }
 
+    getQuoteIndex = (quote) => {
+        const quotes = this.state.quotes;
+        return quotes.map((element) => element._id).indexOf(quote._id);
+    }
+
     resetGame = () => {
         this.setState((prevState) => {
             return { gameId: prevState.gameId + 1};
         });
     };
 
-    getQuoteIndex = (quote) => {
-        let quotes = this.state.quotes;
-        return quotes.map(function(e) {
-            return e._id;
-        }).indexOf(quote._id);
-    }
-
     loadNewQuote = () => {
         this.setState((prevState) => {
-            let quotes = this.state.quotes;
+            const quotes = this.state.quotes;
             let quote = this.state.quote;
 
             if (this.qindex === undefined) {
@@ -66,13 +63,11 @@ export default class QuoteDetail extends React.Component {
             }
 
             quote = quotes[++this.qindex];
-            this.setState({
-                quote: quote
-            });
+            this.setState(quote);
 
             if (
                 quote.sentence === prevState.quote.sentence ||
-                quote.sentence.split(" ").length > CONSTANTS.BELT_MAX_WORDS.WHITE
+                quote.sentence.split(' ').length > CONSTANTS.BELT_MAX_WORDS.WHITE
             ) {
                 // this.loadNewQuote();
                 return;
@@ -80,7 +75,7 @@ export default class QuoteDetail extends React.Component {
 
             return {
                 gameId: prevState.gameId + 1,
-                quote: quote,
+                quote,
             };
         });
     };
@@ -95,7 +90,7 @@ export default class QuoteDetail extends React.Component {
             initialSeconds: 30,
             onPlayAgain: this.resetGame,
             onNewQuote: this.loadNewQuote,
-        }
+        };
 
         return (
             <View style={styles.detailContainer}>
