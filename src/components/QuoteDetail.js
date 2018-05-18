@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-17 06:59:41
+* @Last Modified time: 2018-05-18 08:28:33
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -99,6 +99,9 @@ export default class QuoteDetail extends React.Component {
 
         return (
             <View style={styles.detailContainer}>
+                <TouchableOpacity onPress={this.props.onBack}>
+                    <Text style={styles.backlink}>Back</Text>
+                </TouchableOpacity>
                 <Game {...gameProps} />
             </View>
 
@@ -119,7 +122,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     backlink: {
-        marginBottom: 5,
         color: '#22f',
     },
     image: {

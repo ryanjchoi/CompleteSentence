@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 08:04:12
+* @Last Modified time: 2018-05-18 08:27:12
 */
 
 import React from 'react';
@@ -158,7 +158,6 @@ const styles = StyleSheet.create({
     gameContainer: {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'space-between',
     },
 
     buttonContainer: {
@@ -176,11 +175,9 @@ const styles = StyleSheet.create({
 
     sentence: {
         fontSize: 20,
-        // backgroundColor: '#bbb',
         color: '#ddd',
         marginHorizontal: 10,
         textAlign: 'center',
-        marginTop: '10%',
     },
 
     merged: {
