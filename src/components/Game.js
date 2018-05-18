@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 07:53:48
+* @Last Modified time: 2018-05-18 08:04:12
 */
 
 import React from 'react';
@@ -127,14 +127,14 @@ export default class Game extends React.Component {
                     )}
                 </View>
                 <View style={styles.buttonContainer}>
+                    <Text style={styles.remainingSeconds}>{this.state.remainingSeconds}</Text>
                     {this.gameStatus !== 'PLAYING' && (
-                        <Button style={styles.playAgain} title="Play Again" onPress={this.props.onPlayAgain} />
+                        <Button title="Play Again" onPress={this.props.onPlayAgain} />
                     )}
-                    <Button style={styles.newQuote} title="New Quote" onPress={this.props.onNewQuote} />
-                    <Button style={styles.reset} title="Reset" onPress={this.props.onPlayAgain} />
+                    <Button title="New Quote" onPress={this.props.onNewQuote} />
+                    <Button title="Reset" onPress={this.props.onPlayAgain} />
                 </View>
-                <Text>{this.state.remainingSeconds}</Text>
-                <View class="likeDown">
+                <View>
                     <Voting />
                 </View>
             </View>
@@ -165,10 +165,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'tomato',
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
     },
 
-    playAgain: {
-        // backgroundColor: 'tomato',
+    remainingSeconds: {
+        fontSize: 20,
+        fontWeight: 'bold',
 
     },
 

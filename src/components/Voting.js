@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 13:44:09
+* @Last Modified time: 2018-05-18 08:03:10
 */
 
 import React from 'react';
@@ -71,7 +71,7 @@ export default class Voting extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.voteContainer}>
                 <TouchableOpacity onPress={() => this.updateVoting("likeVote")}>
                     <Image
                         source={require('./icons8-thumbs-up-50.png')}
@@ -102,6 +102,12 @@ Voting.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+    voteContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+
+    },
+
     likeDown: {
 
     },
