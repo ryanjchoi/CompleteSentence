@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 18:59:27
+* @Last Modified time: 2018-05-18 07:53:48
 */
 
 import React from 'react';
@@ -107,7 +107,7 @@ export default class Game extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
                 <Text style={[styles.merged, styles[`STATUS_${this.gameStatus}`]]}>
                     {this.getMergeSelected()}
@@ -126,11 +126,13 @@ export default class Game extends React.Component {
                         />
                     )}
                 </View>
-                {this.gameStatus !== 'PLAYING' && (
-                    <Button title="Play Again" onPress={this.props.onPlayAgain} />
-                )}
-                <Button title="New Quote" onPress={this.props.onNewQuote} />
-                <Button title="Reset" onPress={this.props.onPlayAgain} />
+                <View style={styles.buttonContainer}>
+                    {this.gameStatus !== 'PLAYING' && (
+                        <Button style={styles.playAgain} title="Play Again" onPress={this.props.onPlayAgain} />
+                    )}
+                    <Button style={styles.newQuote} title="New Quote" onPress={this.props.onNewQuote} />
+                    <Button style={styles.reset} title="Reset" onPress={this.props.onPlayAgain} />
+                </View>
                 <Text>{this.state.remainingSeconds}</Text>
                 <View class="likeDown">
                     <Voting />
@@ -153,10 +155,21 @@ Game.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    gameContainer: {
+        display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'space-between',
+    },
+
+    buttonContainer: {
+        backgroundColor: 'tomato',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    playAgain: {
+        // backgroundColor: 'tomato',
+
     },
 
     sentence: {

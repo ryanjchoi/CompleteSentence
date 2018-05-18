@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-15 07:13:50
+* @Last Modified time: 2018-05-17 06:59:41
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -98,12 +98,19 @@ export default class QuoteDetail extends React.Component {
         }
 
         return (
-            <Game {...gameProps} />
+            <View style={styles.detailContainer}>
+                <Game {...gameProps} />
+            </View>
+
         );
     }
 }
 
 const styles = StyleSheet.create({
+    detailContainer: {
+        display: 'flex',
+        height: '100%',
+    },
     quote: {
         marginHorizontal: 12,
     },
