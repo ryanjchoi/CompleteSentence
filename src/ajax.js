@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:59:20
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 09:32:10
+* @Last Modified time: 2018-05-19 12:01:33
 */
 
 const apiHost = 'http://localhost:3000/api/v1/quotes'
@@ -18,7 +18,7 @@ export default {
         }
     },
 
-    async fetchQuoteSearchResults(searchTerm) {
+    async fetchQuotes(searchTerm) {
         const apiUrl = !searchTerm ? apiHost : apiHost + '/sentence/' + searchTerm;
 
         try {
