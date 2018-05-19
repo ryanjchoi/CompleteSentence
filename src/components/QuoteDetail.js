@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 10:02:19
+* @Last Modified time: 2018-05-19 13:01:54
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -42,7 +42,7 @@ export default class QuoteDetail extends React.Component {
     }
 
     getQuoteIndex = (quote) => {
-        const quotes = this.state.quotes;
+        const { quotes } = this.state;
         return quotes.map((element) => element._id).indexOf(quote._id);
     }
 
@@ -54,7 +54,7 @@ export default class QuoteDetail extends React.Component {
 
     loadNewQuote = () => {
         this.setState((prevState) => {
-            const quotes = this.state.quotes;
+            const { quotes } = this.state;
             let quote = this.state.quote;
 
             if (this.qindex === undefined) {
