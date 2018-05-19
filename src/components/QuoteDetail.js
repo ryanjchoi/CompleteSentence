@@ -82,7 +82,6 @@ export default class QuoteDetail extends React.Component {
 
     render() {
         const { quote } = this.state;
-        console.log("Ryan qupte => ", qupte);
 
         const gameProps = {
             key: this.state.gameId,

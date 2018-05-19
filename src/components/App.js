@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 21:55:41
+* @Last Modified time: 2018-05-19 09:28:11
 */
 
 import React from 'react';
@@ -19,38 +19,41 @@ class App extends React.Component {
 
         this.state = {
             quotes: [],
-            quotesFormSearch: [],
             currentQuoteId: null,
         };
     }
 
     async componentDidMount() {
-        const quotes = await ajax.fetchInitialQuotes();
+        const quotes = await ajax.fetchQuoteSearchResults("");
         this.setState({ quotes });
     }
 
-    setCurrentQuote = (quoteId) => {
+    setCurrentQuoteId = (quoteId) => {
         this.setState({
             currentQuoteId: quoteId,
         });
     };
 
-    unsetCurrentQuote = () => {
+    unsetCurrentQuoteId = () => {
         this.setState({
             currentQuoteId: null,
         });
     };
 
     searchQuotes = async (searchTerm) => {
-        let quotesFormSearch = [];
+        let quotes = [];
         if (searchTerm) {
-            quotesFormSearch = await ajax.fetchQuoteSearchResults(searchTerm);
+            quotes = await ajax.fetchQuoteSearchResults(searchTerm);
         }
-        this.setState({ quotesFormSearch });
+        this.setState({ quotes });
     };
 
     currentQuote = () => this.state.quotes.find(
-        (quote) => quote._id === this.state.currentQuoteId
+
+        (quote) => {
+            console.log("Ryan quote => ", quote);
+            return quote._id === this.state.currentQuoteId
+        }
     );
 
     render() {
@@ -60,16 +63,13 @@ class App extends React.Component {
                     <QuoteDetail
                         quotes={this.state.quotes}
                         initialQuoteData={this.currentQuote()}
-                        onBack={this.unsetCurrentQuote}
+                        onBack={this.unsetCurrentQuoteId}
                     />
                 </View>
             );
         }
 
-        const quotesToDisplay =
-            this.state.quotesFormSearch.length > 0
-                ? this.state.quotesFormSearch
-                : this.state.quotes;
+        const quotesToDisplay = this.state.quotes;
 
         if (quotesToDisplay.length > 0) {
             return (
@@ -77,7 +77,7 @@ class App extends React.Component {
                     <SearchBar searchQuotes={this.searchQuotes} />
                     <QuoteList
                         quotes={quotesToDisplay}
-                        onItemPress={this.setCurrentQuote}
+                        onItemPress={this.setCurrentQuoteId}
                     />
                 </View>
             );
