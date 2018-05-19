@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 21:55:18
+* @Last Modified time: 2018-05-19 09:50:37
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -35,10 +35,10 @@ export default class QuoteDetail extends React.Component {
     }
 
     async componentDidMount() {
-        const fullQuote = await ajax.fetchQuoteDetail(this.state.quote._id);
-        console.log('Ryan fullQuote => ', fullQuote);
+        const quote = await ajax.fetchQuoteDetail(this.state.quote._id);
+        console.log("Ryan QuoteDetail componentDidMount quote => ", quote);
         this.setState({
-            quote: fullQuote,
+            quote: quote,
         });
     }
 
