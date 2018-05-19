@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-09 19:09:59
+* @Last Modified time: 2018-05-19 12:31:10
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -12,7 +12,7 @@ import { TextInput, StyleSheet } from 'react-native';
 
 export default class SearchBar extends React.Component {
     static propTypes = {
-        searchQuotes: PropTypes.func.isRequired,
+        onSearch: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -23,7 +23,7 @@ export default class SearchBar extends React.Component {
         };
     }
 
-    debouncedSearchQuotes = debounce(this.props.searchQuotes, 300);
+    debouncedSearchQuotes = debounce(this.props.onSearch, 300);
 
     handleChange = (searchTerm) => {
         this.setState({ searchTerm }, () => {

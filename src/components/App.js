@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 12:04:20
+* @Last Modified time: 2018-05-19 12:31:01
 */
 
 import React from 'react';
@@ -49,9 +49,7 @@ class App extends React.Component {
     };
 
     getQuote = () => this.state.quotes.find(
-        (quote) => {
-            return quote._id === this.state.quoteId
-        }
+        (quote) => quote._id === this.state.quoteId
     );
 
     render() {
@@ -72,7 +70,7 @@ class App extends React.Component {
         if (quotesToDisplay.length > 0) {
             return (
                 <View style={styles.main}>
-                    <SearchBar searchQuotes={this.searchQuotes} />
+                    <SearchBar onSearch={this.searchQuotes} />
                     <QuoteList
                         quotes={quotesToDisplay}
                         onItemPress={this.setQuoteId}

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 08:27:12
+* @Last Modified time: 2018-05-19 12:11:52
 */
 
 import React from 'react';
@@ -70,10 +70,10 @@ export default class Game extends React.Component {
         const defaultMessage = 'Please select words below to complete a sentence.';
         const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
             if (acc === defaultMessage) {
-                acc = "";
+                acc = '';
             }
             return `${acc} ${this.shuffledWords[curr]}`.trim();
-        },  defaultMessage);
+        }, defaultMessage);
 
         return mergeSelected;
     };
@@ -85,7 +85,7 @@ export default class Game extends React.Component {
         if (nextState.remainingSeconds === 0) {
             return 'LOST';
         }
-        if (mergeSelected.split(" ").length < this.words.length) {
+        if (mergeSelected.split(' ').length < this.words.length) {
             return 'PLAYING';
         }
         if (mergeSelected === this.props.sentence) {
