@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 09:44:31
+* @Last Modified time: 2018-05-19 10:02:11
 */
 
 import React from 'react';
@@ -24,7 +24,7 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
-        const quotes = await ajax.fetchQuoteSearchResults("");
+        const quotes = await ajax.fetchQuoteSearchResults();
         this.setState({ quotes });
     }
 
@@ -49,9 +49,7 @@ class App extends React.Component {
     };
 
     getCurrentQuote = () => this.state.quotes.find(
-
         (quote) => {
-            console.log("Ryan App getCurrentQuote quote => ", quote);
             return quote._id === this.state.currentQuoteId
         }
     );
@@ -62,7 +60,7 @@ class App extends React.Component {
                 <View style={styles.main}>
                     <QuoteDetail
                         quotes={this.state.quotes}
-                        initialQuoteData={this.getCurrentQuote()}
+                        currentQuote={this.getCurrentQuote()}
                         onBack={this.unsetCurrentQuoteId}
                     />
                 </View>

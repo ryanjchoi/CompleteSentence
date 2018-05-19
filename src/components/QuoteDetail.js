@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 09:50:37
+* @Last Modified time: 2018-05-19 10:02:19
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ import ajax from '../ajax';
 export default class QuoteDetail extends React.Component {
     static propTypes = {
         quotes: PropTypes.array.isRequired,
-        initialQuoteData: PropTypes.object.isRequired,
+        currentQuote: PropTypes.object.isRequired,
         onBack: PropTypes.func.isRequired,
     };
 
@@ -30,13 +30,12 @@ export default class QuoteDetail extends React.Component {
         this.state = {
             quotes: this.props.quotes,
             gameId: 0,
-            quote: this.props.initialQuoteData,
+            quote: this.props.currentQuote,
         };
     }
 
     async componentDidMount() {
         const quote = await ajax.fetchQuoteDetail(this.state.quote._id);
-        console.log("Ryan QuoteDetail componentDidMount quote => ", quote);
         this.setState({
             quote: quote,
         });
