@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 12:11:52
+* @Last Modified time: 2018-05-19 16:35:34
 */
 
 import React from 'react';
@@ -131,7 +131,7 @@ export default class Game extends React.Component {
                     {this.gameStatus !== 'PLAYING' && (
                         <Button title="Play Again" onPress={this.props.onPlayAgain} />
                     )}
-                    <Button title="New Quote" onPress={this.props.onNewQuote} />
+                    <Button title="Next Quote" onPress={this.props.onNextQuote} />
                     <Button title="Reset" onPress={this.props.onPlayAgain} />
                 </View>
                 <View>
@@ -147,7 +147,7 @@ Game.propTypes = {
     author: PropTypes.string.isRequired,
     initialSeconds: PropTypes.number.isRequired,
     onPlayAgain: PropTypes.func.isRequired,
-    onNewQuote: PropTypes.func.isRequired,
+    onNextQuote: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {

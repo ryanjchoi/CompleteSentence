@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-13 07:30:16
+* @Last Modified time: 2018-05-19 16:31:33
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,11 +10,6 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import QuoteItem from './QuoteItem';
 
 class QuoteList extends React.Component {
-    static propTypes = {
-        quotes: PropTypes.array.isRequired,
-        onItemPress: PropTypes.func.isRequired,
-    }
-
     constructor(props) {
         super(props);
     }
@@ -37,7 +32,11 @@ class QuoteList extends React.Component {
     }
 }
 
-// ...
+QuoteList.propTypes = {
+    quotes: PropTypes.array.isRequired,
+    onItemPress: PropTypes.func.isRequired,
+}
+
 const styles = StyleSheet.create({
     list: {
         backgroundColor: '#eee',

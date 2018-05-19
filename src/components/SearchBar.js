@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 12:31:10
+* @Last Modified time: 2018-05-19 16:34:23
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -11,9 +11,6 @@ import debounce from 'lodash.debounce';
 import { TextInput, StyleSheet } from 'react-native';
 
 export default class SearchBar extends React.Component {
-    static propTypes = {
-        onSearch: PropTypes.func.isRequired,
-    };
 
     constructor(props) {
         super(props);
@@ -41,6 +38,10 @@ export default class SearchBar extends React.Component {
         );
     }
 }
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+};
 
 const styles = StyleSheet.create({
     input: {

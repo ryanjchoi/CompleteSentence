@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 13:01:54
+* @Last Modified time: 2018-05-19 16:35:58
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,12 +18,6 @@ import * as CONSTANTS from './constants';
 import ajax from '../ajax';
 
 export default class QuoteDetail extends React.Component {
-    static propTypes = {
-        quotes: PropTypes.array.isRequired,
-        currentQuote: PropTypes.object.isRequired,
-        onBack: PropTypes.func.isRequired,
-    };
-
     constructor(props) {
         super(props);
 
@@ -52,7 +46,7 @@ export default class QuoteDetail extends React.Component {
         });
     };
 
-    loadNewQuote = () => {
+    loadNextQuote = () => {
         this.setState((prevState) => {
             const { quotes } = this.state;
             let quote = this.state.quote;
@@ -68,7 +62,7 @@ export default class QuoteDetail extends React.Component {
                 quote.sentence === prevState.quote.sentence ||
                 quote.sentence.split(' ').length > CONSTANTS.BELT_MAX_WORDS.WHITE
             ) {
-                // this.loadNewQuote();
+                // this.loadNextQuote();
                 return;
             }
 
@@ -88,7 +82,7 @@ export default class QuoteDetail extends React.Component {
             author: quote.author,
             initialSeconds: 30,
             onPlayAgain: this.resetGame,
-            onNewQuote: this.loadNewQuote,
+            onNextQuote: this.loadNextQuote,
         };
 
         return (
@@ -102,6 +96,12 @@ export default class QuoteDetail extends React.Component {
         );
     }
 }
+
+QuoteDetail.propTypes = {
+    quotes: PropTypes.array.isRequired,
+    currentQuote: PropTypes.object.isRequired,
+    onBack: PropTypes.func.isRequired,
+};
 
 const styles = StyleSheet.create({
     detailContainer: {
