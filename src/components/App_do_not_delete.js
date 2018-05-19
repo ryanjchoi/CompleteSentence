@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 09:50:48
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-03 06:31:04
+* @Last Modified time: 2018-05-18 21:56:05
 */
 
 // hide a warning message in the bottom of the simulator
@@ -37,10 +37,8 @@ export default class App extends React.Component {
         let quote = {};
         if (result === undefined) {
             quote = SENTENCES.QUOTES[Math.floor(Math.random() * SENTENCES.QUOTES.length)];
-            // console.log("Ryan1 quote => ", quote);
         } else {
             quote = result[Math.floor(Math.random() * result.length)];
-            // console.log("Ryan2 quote => ", quote);
         }
 
         return quote;
@@ -48,11 +46,8 @@ export default class App extends React.Component {
 
     fetchQuote() {
         fetch('http://localhost:3000/api/v1/quotes').then( (response) => {
-            // console.log("Ryan response.json() => ", response.json());
             return response.json();
         }).then( (result) => {
-            // console.log("Ryan result => ", result);
-            // console.log("Ryan result[0].author => ", result[0].author);
             let quote = this.getQuote(result);
 
             this.setState({
@@ -78,9 +73,7 @@ export default class App extends React.Component {
 
     loadNewQuote = () => {
         this.setState((prevState) => {
-
             let quote = this.getQuote();
-            // let quote = this.fetchQuote();
 
             if (
                 quote.sentence === prevState.quote.sentence ||

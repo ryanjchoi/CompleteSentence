@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-13 07:12:58
+* @Last Modified time: 2018-05-18 21:55:41
 */
 
 import React from 'react';
@@ -30,7 +30,6 @@ class App extends React.Component {
     }
 
     setCurrentQuote = (quoteId) => {
-        console.log("Ryan quoteId => ", quoteId);
         this.setState({
             currentQuoteId: quoteId,
         });

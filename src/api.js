@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-10 06:53:50
+* @Last Modified time: 2018-05-18 15:34:20
 */
 
 const Hapi = require('hapi');
@@ -51,7 +51,7 @@ server.route([
         handler: (request, reply) => {
             const id = request.params.id;
             const result = Task.findOne({
-                '_id': id
+                _id: id
             });
             result.exec((err, quote) => {
                 if (quote) {
@@ -131,7 +131,7 @@ server.route([
                 author: request.params.author
             };
             Task.findOneAndUpdate(
-                { '_id': request.params.id },
+                { _id: request.params.id },
                 updateData,
                 { new: true },
                 (err, doc) => {
@@ -147,7 +147,7 @@ server.route([
         path: '/api/v1/quotes/id/{id}',
         handler: (request, reply) => {
             Task.findOneAndRemove(
-            { '_id': request.params.id },
+            { _id: request.params.id },
             (err, response) => {
                 reply().code(204);
             });

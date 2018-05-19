@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 08:38:03
+* @Last Modified time: 2018-05-18 21:55:18
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -82,6 +82,7 @@ export default class QuoteDetail extends React.Component {
 
     render() {
         const { quote } = this.state;
+        console.log("Ryan qupte => ", qupte);
 
         const gameProps = {
             key: this.state.gameId,
