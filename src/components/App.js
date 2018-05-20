@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 22:23:15
+* @Last Modified time: 2018-05-20 16:22:36
 */
 
 import React from 'react';
@@ -19,7 +19,7 @@ class App extends React.Component {
 
         this.state = {
             quotes: [],
-            quoteId: null,
+            quote: null,
         };
     }
 
@@ -28,15 +28,15 @@ class App extends React.Component {
         this.setState({ quotes });
     }
 
-    setQuoteId = (quoteId) => {
-        this.setState({ quoteId });
-    };
+    setQuote = (quote) => {
+        this.setState({ quote });
+    }
 
-    unSetQuoteId = () => {
+    unSetQuote = () => {
         this.setState({
-            quoteId: null,
+            quote: null,
         });
-    };
+    }
 
     searchQuotes = async (searchTerm) => {
         let quotes = [];
@@ -44,24 +44,24 @@ class App extends React.Component {
             quotes = await ajax.fetchQuotes(searchTerm);
         }
         this.setState({ quotes });
-    };
+    }
 
     getQuote = () => this.state.quotes.find(
         (quote) => {
-            if (quote._id === this.state.quoteId) {
+            if (quote._id === this.state.quote._id) {
                 return quote;
             }
         }
-    );
+    )
 
     render() {
-        if (this.state.quoteId) {
+        if (!!this.state.quote) {
             return (
                 <View style={styles.main}>
                     <QuoteDetail
                         quotes={this.state.quotes}
                         currentQuote={this.getQuote()}
-                        onBack={this.unSetQuoteId}
+                        onBack={this.unSetQuote}
                     />
                 </View>
             );
@@ -74,7 +74,7 @@ class App extends React.Component {
                     <SearchBar onSearch={this.searchQuotes} />
                     <QuoteList
                         quotes={quotes}
-                        onItemPress={this.setQuoteId}
+                        onItemPress={this.setQuote}
                     />
                 </View>
             );
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 40,
     },
-});
+})
 
 export default App;

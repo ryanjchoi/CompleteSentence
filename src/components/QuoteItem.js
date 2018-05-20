@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 16:33:20
+* @Last Modified time: 2018-05-20 16:18:06
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ export default class QuoteItem extends React.Component {
     }
 
     handlePress = () => {
-        this.props.onPress(this.props.quote._id);
+        this.props.onPress(this.props.quote);
     }
 
     render() {
