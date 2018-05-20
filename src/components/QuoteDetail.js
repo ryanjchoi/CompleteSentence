@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 16:35:58
+* @Last Modified time: 2018-05-20 07:08:18
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
     },
     backlink: {
         color: '#22f',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 12,
     },
     image: {
         width: '100%',

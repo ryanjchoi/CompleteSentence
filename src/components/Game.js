@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 16:35:34
+* @Last Modified time: 2018-05-20 07:22:44
 */
 
 import React from 'react';
@@ -90,9 +90,8 @@ export default class Game extends React.Component {
         }
         if (mergeSelected === this.props.sentence) {
             return 'WON';
-        } else {
-            return 'LOST';
         }
+        return 'LOST';
     };
 
     isNumberSelected = (wordIndex) => {
@@ -109,10 +108,10 @@ export default class Game extends React.Component {
         return (
             <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
+                <Text style={styles.author}>- {this.props.author}</Text>
                 <Text style={[styles.merged, styles[`STATUS_${this.gameStatus}`]]}>
                     {this.getMergeSelected()}
                 </Text>
-                <Text style={styles.author}>- {this.props.author}</Text>
                 <View style={styles.wordsContainer}>
                     {this.shuffledWords.map((randomWord, index) =>
                         <RandomWord
@@ -151,7 +150,9 @@ Game.propTypes = {
 };
 
 Game.defaultProps = {
-
+    sentence: "",
+    author: "",
+    initialSeconds: 0,
 };
 
 const styles = StyleSheet.create({
@@ -176,24 +177,24 @@ const styles = StyleSheet.create({
     sentence: {
         fontSize: 20,
         color: '#ddd',
-        marginHorizontal: 10,
-        textAlign: 'center',
+        paddingHorizontal: 12,
+        paddingVertical: 3,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     merged: {
         fontSize: 20,
         backgroundColor: '#bbb',
-        marginHorizontal: 10,
-        textAlign: 'center',
+        paddingHorizontal: 12,
+        paddingVertical: 3,
         marginTop: '1%',
     },
 
     author: {
         fontSize: 20,
-        backgroundColor: '#bbb',
         marginHorizontal: 10,
-        textAlign: 'center',
-        marginTop: '1%',
     },
 
     wordsContainer: {

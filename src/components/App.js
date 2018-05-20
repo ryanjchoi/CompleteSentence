@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 13:01:12
+* @Last Modified time: 2018-05-19 22:23:15
 */
 
 import React from 'react';
@@ -29,12 +29,10 @@ class App extends React.Component {
     }
 
     setQuoteId = (quoteId) => {
-        this.setState({
-            quoteId: quoteId,
-        });
+        this.setState({ quoteId });
     };
 
-    unsetQuoteId = () => {
+    unSetQuoteId = () => {
         this.setState({
             quoteId: null,
         });
@@ -49,7 +47,11 @@ class App extends React.Component {
     };
 
     getQuote = () => this.state.quotes.find(
-        (quote) => quote._id === this.state.quoteId
+        (quote) => {
+            if (quote._id === this.state.quoteId) {
+                return quote;
+            }
+        }
     );
 
     render() {
@@ -59,7 +61,7 @@ class App extends React.Component {
                     <QuoteDetail
                         quotes={this.state.quotes}
                         currentQuote={this.getQuote()}
-                        onBack={this.unsetQuoteId}
+                        onBack={this.unSetQuoteId}
                     />
                 </View>
             );
