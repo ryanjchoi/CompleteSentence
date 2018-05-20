@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 21:56:36
+* @Last Modified time: 2018-05-20 16:02:55
 */
 
 import React from 'react';
@@ -73,14 +73,14 @@ export default class Voting extends React.Component {
             <View style={styles.voteContainer}>
                 <TouchableOpacity onPress={() => this.updateVoting("likeVote")}>
                     <Image
-                        source={require('./icons8-thumbs-up-50.png')}
+                        source={require('../../assets/images/icons8-thumbs-up-50.png')}
                         style={this.like}
                     />
                 </TouchableOpacity>
                 <Text>"likeVote: " {this.state.likeVote}</Text>
                 <TouchableOpacity onPress={() => this.updateVoting("dilikeVote")}>
                     <Image
-                        source={require('./icons8-thumbs-down-50.png')}
+                        source={require('../../assets/images/icons8-thumbs-down-50.png')}
                         style={this.disike}
                     />
                 </TouchableOpacity>
