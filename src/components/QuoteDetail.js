@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 17:08:14
+* @Last Modified time: 2018-05-21 15:32:37
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ export default class QuoteDetail extends React.Component {
         this.setState((prevState) => {
             return { gameId: prevState.gameId + 1};
         });
-    };
+    }
 
     loadNextQuote = () => {
         this.setState((prevState) => {
@@ -56,7 +56,7 @@ export default class QuoteDetail extends React.Component {
             }
 
             quote = quotes[++this.qindex];
-            this.setState(quote);
+            this.setState({quote});
 
             if (
                 quote.sentence === prevState.quote.sentence ||
@@ -71,7 +71,7 @@ export default class QuoteDetail extends React.Component {
                 quote,
             };
         });
-    };
+    }
 
     render() {
         const { quote } = this.state;
@@ -121,10 +121,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     backlink: {
+        fontSize: 20,
+        margin: 5,
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingLeft: 12,
+        paddingRight: 12,
+        borderWidth: 2,
+        borderRadius: 10,
+        alignSelf: 'flex-start',
         color: '#22f',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginLeft: 12,
     },
     image: {
         width: '100%',
