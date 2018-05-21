@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:48:50
+* @Last Modified time: 2018-05-21 17:15:02
 */
 
 import React from 'react';
@@ -80,15 +80,22 @@ class Game extends React.Component {
 
     // gameStatus: PLAYING, WON, LOST
     calcGameStatus = (nextState) => {
+        const { sentence } = this.props;
         const mergeSelected = this.getMergeSelected(nextState);
 
         if (nextState.remainingSeconds === 0) {
             return 'LOST';
         }
+
+        const re = new RegExp(mergeSelected, 'i');
+        if (sentence.search(re) !== 0) {
+            return 'LOST';
+        }
+
         if (mergeSelected.split(' ').length < this.words.length) {
             return 'PLAYING';
         }
-        if (mergeSelected === this.props.sentence) {
+        if (mergeSelected === sentence) {
             return 'WON';
         }
         return 'LOST';
