@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 07:22:44
+* @Last Modified time: 2018-05-20 17:07:13
 */
 
 import React from 'react';
@@ -147,13 +147,13 @@ Game.propTypes = {
     initialSeconds: PropTypes.number.isRequired,
     onPlayAgain: PropTypes.func.isRequired,
     onNextQuote: PropTypes.func.isRequired,
-};
+}
 
 Game.defaultProps = {
     sentence: "",
     author: "",
     initialSeconds: 0,
-};
+}
 
 const styles = StyleSheet.create({
     gameContainer: {

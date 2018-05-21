@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 16:02:55
+* @Last Modified time: 2018-05-20 17:14:24
 */
 
 import React from 'react';
@@ -96,8 +96,8 @@ Voting.propTypes = {
 };
 
 Voting.defaultProps = {
-    // likeVote: 0,
-    // dislikeVote: 0,
+    likeVote: 0,
+    dislikeVote: 0,
 };
 
 const styles = StyleSheet.create({

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-15 21:11:50
+* @Last Modified time: 2018-05-20 17:12:49
 */
 
 import React from 'react';
@@ -43,7 +43,9 @@ RandomWord.propTypes = {
 };
 
 RandomWord.defaultProps = {
-
+    id: 0,
+    word: '',
+    isDisabled: false,
 };
 
 const styles = StyleSheet.create({

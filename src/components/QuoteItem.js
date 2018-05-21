@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 16:18:06
+* @Last Modified time: 2018-05-20 17:11:37
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -48,7 +48,12 @@ QuoteItem.propTypes = {
     quotes: PropTypes.array.isRequired,
     quote: PropTypes.object.isRequired,
     onPress: PropTypes.func.isRequired,
-};
+}
+
+QuoteItem.defaultProps = {
+    quotes: [],
+    quote: {},
+}
 
 const styles = StyleSheet.create({
     quote: {

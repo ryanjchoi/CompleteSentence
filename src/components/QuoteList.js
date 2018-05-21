@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-19 16:31:33
+* @Last Modified time: 2018-05-20 17:12:07
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -35,6 +35,10 @@ class QuoteList extends React.Component {
 QuoteList.propTypes = {
     quotes: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
+}
+
+QuoteList.defaultProps = {
+    quotes: [],
 }
 
 const styles = StyleSheet.create({

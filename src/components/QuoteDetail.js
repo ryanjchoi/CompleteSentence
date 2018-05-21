@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 07:08:18
+* @Last Modified time: 2018-05-20 17:08:14
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -101,7 +101,12 @@ QuoteDetail.propTypes = {
     quotes: PropTypes.array.isRequired,
     currentQuote: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,
-};
+}
+
+QuoteDetail.defaultProps = {
+    quotes: [],
+    currentQuote: {},
+}
 
 const styles = StyleSheet.create({
     detailContainer: {
