@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 17:14:24
+* @Last Modified time: 2018-05-21 15:52:24
 */
 
 import React from 'react';
@@ -16,7 +16,7 @@ import {
     AsyncStorage,
 } from 'react-native';
 
-export default class Voting extends React.Component {
+class Voting extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,12 +24,12 @@ export default class Voting extends React.Component {
         this.state = {
             likeVote: 0,
             dislikeVote: 0,
-        }
-    };
+        };
+    }
 
     componentDidMount() {
 
-    };
+    }
 
     increaseDisike = () => {
         let dislikeVote = 1;
@@ -39,7 +39,7 @@ export default class Voting extends React.Component {
             dislikeVote: dislikeVote
         });
 
-    };
+    }
 
     updateVoting = async (key) => {
         var oldLikeVote;
@@ -61,24 +61,24 @@ export default class Voting extends React.Component {
         if (key === "dislikeVote") {
             let likeVote = (oldLikeVote || parseInt(this.state.dislikeVote)) + 1;
 
-            AsyncStorage.setItem("dislikeVote", dislikeVote.toString());
+            AsyncStorage.setItem('dislikeVote', dislikeVote.toString());
             this.setState({
                 dislikeVote: dislikeVote
             });
         }
-    };
+    }
 
     render() {
         return (
             <View style={styles.voteContainer}>
-                <TouchableOpacity onPress={() => this.updateVoting("likeVote")}>
+                <TouchableOpacity onPress={() => this.updateVoting('likeVote')}>
                     <Image
                         source={require('../../assets/images/icons8-thumbs-up-50.png')}
                         style={this.like}
                     />
                 </TouchableOpacity>
                 <Text>"likeVote: " {this.state.likeVote}</Text>
-                <TouchableOpacity onPress={() => this.updateVoting("dilikeVote")}>
+                <TouchableOpacity onPress={() => this.updateVoting('dilikeVote')}>
                     <Image
                         source={require('../../assets/images/icons8-thumbs-down-50.png')}
                         style={this.disike}
@@ -87,18 +87,18 @@ export default class Voting extends React.Component {
                 <Text>"dislikeVote: " {this.state.dislikeVote}</Text>
             </View>
         );
-    };
-};
+    }
+}
 
 Voting.propTypes = {
     likeVote: PropTypes.number,
     dislikeVote: PropTypes.number,
-};
+}
 
 Voting.defaultProps = {
     likeVote: 0,
     dislikeVote: 0,
-};
+}
 
 const styles = StyleSheet.create({
     voteContainer: {
@@ -114,4 +114,6 @@ const styles = StyleSheet.create({
     like: {
 
     },
-});
+})
+
+export default Voting

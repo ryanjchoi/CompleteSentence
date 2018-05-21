@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 17:13:28
+* @Last Modified time: 2018-05-21 15:50:13
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ import debounce from 'lodash.debounce';
 
 import { TextInput, StyleSheet } from 'react-native';
 
-export default class SearchBar extends React.Component {
+class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
@@ -53,3 +53,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 12,
     },
 })
+
+export default SearchBar

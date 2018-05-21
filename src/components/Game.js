@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 17:07:13
+* @Last Modified time: 2018-05-21 15:48:50
 */
 
 import React from 'react';
@@ -17,7 +17,7 @@ import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
 import Voting from './Voting';
 
-export default class Game extends React.Component {
+class Game extends React.Component {
 
     constructor(props) {
         super(props);
@@ -212,3 +212,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
     },
 });
+
+export default Game

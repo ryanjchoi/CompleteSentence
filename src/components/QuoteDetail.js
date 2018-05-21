@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:32:37
+* @Last Modified time: 2018-05-21 15:49:18
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import Game from './Game';
 import * as CONSTANTS from './constants';
 import ajax from '../ajax';
 
-export default class QuoteDetail extends React.Component {
+class QuoteDetail extends React.Component {
     constructor(props) {
         super(props);
 
@@ -164,3 +164,5 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default QuoteDetail

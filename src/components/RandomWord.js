@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-20 17:12:49
+* @Last Modified time: 2018-05-21 15:49:48
 */
 
 import React from 'react';
@@ -13,7 +13,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-export default class RandomWord extends React.Component {
+class RandomWord extends React.Component {
 
     constructor(props) {
         super(props);
@@ -63,3 +63,4 @@ const styles = StyleSheet.create({
     }
 });
 
+export default RandomWord
