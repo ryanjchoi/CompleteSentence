@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-23 13:25:55
+* @Last Modified time: 2018-05-23 16:22:36
 */
 
 import React from 'react';
@@ -24,6 +24,7 @@ class Game extends React.Component {
 
         this.state = {
             selectedWords: [],
+            shuffledWords: [],
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -35,6 +36,7 @@ class Game extends React.Component {
         }
 
         this.shuffledWords = shuffle(this.words);
+        this.setState({ shuffledWords: this.shuffledWords });
     }
 
     componentDidMount() {
@@ -68,11 +70,14 @@ class Game extends React.Component {
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
-        const mergeSelected = nextState.selectedWords.reduce((acc, curr) => {
-            if (acc === defaultMessage) {
-                acc = '';
+        const mergeSelected = nextState.selectedWords.reduce((accumulator, currentValue) => {
+            // Remove the default message when starts
+            if (accumulator === defaultMessage) {
+                accumulator = '';
             }
-            return `${acc} ${this.shuffledWords[curr]}`.trim();
+            console.log("Ryan accumulator => ", accumulator);
+            console.log("Ryan currentValue => ", currentValue);
+            return `${accumulator} ${currentValue}`.trim();
         }, defaultMessage);
 
         return mergeSelected;
@@ -101,9 +106,12 @@ class Game extends React.Component {
         return 'LOST';
     };
 
-    selectWord = (word) => {
+    selectWord = (randomWord) => {
+        this.shuffledWords = this.shuffledWords.filter((word) => word !== randomWord)
+
         this.setState((prevState) => ({
-            selectedWords: [...prevState.selectedWords, word],
+            selectedWords: [...prevState.selectedWords, randomWord],
+            shuffledWords: this.shuffledWords,
         }));
     };
 
@@ -121,7 +129,7 @@ class Game extends React.Component {
                             key={index}
                             id={index}
                             word={randomWord}
-                            onPress={this.selectWord}
+                            onPress={() => this.selectWord(randomWord)}
                         />
                     )}
                 </View>
