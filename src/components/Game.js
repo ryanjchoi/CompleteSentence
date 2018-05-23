@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 17:15:02
+* @Last Modified time: 2018-05-23 13:09:13
 */
 
 import React from 'react';
@@ -23,7 +23,7 @@ class Game extends React.Component {
         super(props);
 
         this.state = {
-            selectedIds: [],
+            selectedWords: [],
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -55,7 +55,7 @@ class Game extends React.Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (
-            nextState.selectedIds !== this.state.selectedIds ||
+            nextState.selectedWords !== this.state.selectedWords ||
             nextState.remainingSeconds === 0
         ) {
             this.gameStatus = this.calcGameStatus(nextState);
@@ -68,7 +68,7 @@ class Game extends React.Component {
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
-        const mergeSelected = nextState.selectedIds.reduce((acc, curr) => {
+        const mergeSelected = nextState.selectedWords.reduce((acc, curr) => {
             if (acc === defaultMessage) {
                 acc = '';
             }
@@ -102,12 +102,12 @@ class Game extends React.Component {
     };
 
     isNumberSelected = (wordIndex) => {
-        return this.state.selectedIds.indexOf(wordIndex) >= 0;
+        return this.state.selectedWords.indexOf(wordIndex) >= 0;
     };
 
     selectWord = (wordIndex) => {
         this.setState((prevState) => ({
-            selectedIds: [...prevState.selectedIds, wordIndex],
+            selectedWords: [...prevState.selectedWords, wordIndex],
         }));
     };
 
