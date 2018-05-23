@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-23 13:09:13
+* @Last Modified time: 2018-05-23 13:25:55
 */
 
 import React from 'react';
@@ -101,13 +101,9 @@ class Game extends React.Component {
         return 'LOST';
     };
 
-    isNumberSelected = (wordIndex) => {
-        return this.state.selectedWords.indexOf(wordIndex) >= 0;
-    };
-
-    selectWord = (wordIndex) => {
+    selectWord = (word) => {
         this.setState((prevState) => ({
-            selectedWords: [...prevState.selectedWords, wordIndex],
+            selectedWords: [...prevState.selectedWords, word],
         }));
     };
 
@@ -125,9 +121,6 @@ class Game extends React.Component {
                             key={index}
                             id={index}
                             word={randomWord}
-                            isDisabled={
-                                this.isNumberSelected(index) || this.gameStatus !== 'PLAYING'
-                            }
                             onPress={this.selectWord}
                         />
                     )}
