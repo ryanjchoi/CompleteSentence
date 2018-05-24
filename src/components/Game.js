@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-23 16:22:36
+* @Last Modified time: 2018-05-24 07:01:27
 */
 
 import React from 'react';
@@ -75,8 +75,6 @@ class Game extends React.Component {
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            console.log("Ryan accumulator => ", accumulator);
-            console.log("Ryan currentValue => ", currentValue);
             return `${accumulator} ${currentValue}`.trim();
         }, defaultMessage);
 
@@ -87,9 +85,14 @@ class Game extends React.Component {
     calcGameStatus = (nextState) => {
         const { sentence } = this.props;
         const mergeSelected = this.getMergeSelected(nextState);
+        console.log("Ryan mergeSelected => ", mergeSelected);
 
-        if (nextState.remainingSeconds === 0) {
-            return 'LOST';
+        if (mergeSelected.split(' ').length < this.words.length) {
+            return 'PLAYING';
+        }
+
+        if (mergeSelected === sentence) {
+            return 'WON';
         }
 
         const re = new RegExp(mergeSelected, 'i');
@@ -97,18 +100,19 @@ class Game extends React.Component {
             return 'LOST';
         }
 
-        if (mergeSelected.split(' ').length < this.words.length) {
-            return 'PLAYING';
+        if (nextState.remainingSeconds === 0) {
+            return 'LOST';
         }
-        if (mergeSelected === sentence) {
-            return 'WON';
-        }
+
         return 'LOST';
     };
 
     selectWord = (randomWord) => {
-        this.shuffledWords = this.shuffledWords.filter((word) => word !== randomWord)
-
+        // this.shuffledWords = words.filter((word) => word !== randomWord);
+        this.shuffledWords.splice(
+            this.shuffledWords.indexOf(randomWord),
+            1
+        );
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: this.shuffledWords,
