@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 19:01:02
+* @Last Modified time: 2018-05-26 19:22:33
 */
 
 import React from 'react';
@@ -36,12 +36,16 @@ class Game extends React.Component {
         } catch (e) {
             console.log(e);
         }
-
     }
 
     componentDidMount() {
         const shuffledWords = shuffle(this.words);
-        this.setState({ shuffledWords: shuffledWords });
+        const shuffledObj = this.getShuffledObj(shuffledWords);
+
+        this.setState({
+            shuffledWords: shuffledWords,
+            shuffledObj: shuffledObj,
+        });
 
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
@@ -52,10 +56,6 @@ class Game extends React.Component {
                 }
             });
         }, 1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.intervalId);
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -71,6 +71,18 @@ class Game extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+
+    getShuffledObj = (arr) => arr.reduce((acc, cur, index) => {
+        var obj = {};
+        var key = '' + index;
+        obj[key] = cur;
+        acc[index] = obj;
+        return acc;
+    }, []);
+
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
         const mergeSelected = nextState.selectedWords.reduce((accumulator, currentValue) => {
@@ -82,13 +94,12 @@ class Game extends React.Component {
         }, defaultMessage);
 
         return mergeSelected;
-    };
+    }
 
     // gameStatus: PLAYING, WON, LOST
     calcGameStatus = (nextState) => {
         const { sentence } = this.props;
         const mergeSelected = this.getMergeSelected(nextState);
-        console.log("Ryan mergeSelected => ", mergeSelected);
 
         if (mergeSelected === sentence) {
             return 'WON';
@@ -109,33 +120,25 @@ class Game extends React.Component {
         }
 
         return 'LOST';
-    };
-
-    getShuffledObj = (arr) => arr.reduce((acc, cur, index) => {
-        acc[index] = { index: cur };
-        return acc;
-    }, []);
+    }
 
     selectWord = (randomWord, index) => {
         var shuffledWords = this.state.shuffledWords;
-        var shuffledObj = this.getShuffledObj(this.state.shuffledWords);
-        console.log("Ryan shuffledObj => ", shuffledObj);
 
         if (shuffledWords.length > MAX_WORDS) {
-            shuffledWords.splice( shuffledWords.indexOf(randomWord), 1 );
+            shuffledWords.splice(shuffledWords.indexOf(randomWord), 1);
         }
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: shuffledWords,
-            shuffledObj: shuffledObj,
         }));
-    };
+    }
 
     isNumberSelected = (wordIndex) => {
 
         return false;
         // return this.state.selectedWords.indexOf(wordIndex) >= 0;
-    };
+    }
 
     render() {
         return (
@@ -170,8 +173,8 @@ class Game extends React.Component {
                     <Voting />
                 </View>
             </View>
-        )
-    };
+        );
+    }
 }
 
 Game.propTypes = {
@@ -180,13 +183,13 @@ Game.propTypes = {
     initialSeconds: propTypes.number.isRequired,
     onPlayAgain: propTypes.func.isRequired,
     onNextQuote: propTypes.func.isRequired,
-}
+};
 
 Game.defaultProps = {
     sentence: "",
     author: "",
     initialSeconds: 0,
-}
+};
 
 const styles = StyleSheet.create({
     gameContainer: {
@@ -246,4 +249,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Game
+export default Game;
