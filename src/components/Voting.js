@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:52:24
+* @Last Modified time: 2018-05-26 15:59:46
 */
 
 import React from 'react';
@@ -90,7 +90,7 @@ class Voting extends React.Component {
     }
 }
 
-Voting.propTypes = {
+Voting.PropTypes = {
     likeVote: PropTypes.number,
     dislikeVote: PropTypes.number,
 }

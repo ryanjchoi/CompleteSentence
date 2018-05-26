@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:47:50
+* @Last Modified time: 2018-05-26 15:59:25
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ class QuoteItem extends React.Component {
     }
 }
 
-QuoteItem.propTypes = {
+QuoteItem.PropTypes = {
     quotes: PropTypes.array.isRequired,
     quote: PropTypes.object.isRequired,
     onPress: PropTypes.func.isRequired,

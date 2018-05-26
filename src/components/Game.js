@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 08:51:47
+* @Last Modified time: 2018-05-26 15:59:15
 */
 
 import React from 'react';
@@ -109,8 +109,15 @@ class Game extends React.Component {
         return 'LOST';
     };
 
+    getShuffledObj = (arr) => arr.reduce((acc, cur, i) => {
+      acc[i] = cur;
+      return acc;
+    }, {});
+
     selectWord = (randomWord) => {
-        console.log("Ryan this.shuffledWords => ", this.shuffledWords);
+        const shuffledObj = this.getShuffledObj(this.shuffledWords);
+        console.log("Ryan shuffledObj => ", shuffledObj);
+
         if (this.shuffledWords.length > MAX_WORDS) {
             this.shuffledWords.splice( this.shuffledWords.indexOf(randomWord), 1 );
         }
@@ -118,6 +125,12 @@ class Game extends React.Component {
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: this.shuffledWords,
         }));
+    };
+
+    isNumberSelected = (wordIndex) => {
+
+        return false;
+        // return this.state.selectedWords.indexOf(wordIndex) >= 0;
     };
 
     render() {
@@ -134,6 +147,9 @@ class Game extends React.Component {
                             key={index}
                             id={index}
                             word={randomWord}
+                            isDisabled={
+                                this.isNumberSelected(index) || this.gameStatus !== 'PLAYING'
+                            }
                             onPress={() => this.selectWord(randomWord)}
                         />
                     )}
@@ -154,7 +170,7 @@ class Game extends React.Component {
     };
 }
 
-Game.propTypes = {
+Game.PropTypes = {
     sentence: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     initialSeconds: PropTypes.number.isRequired,

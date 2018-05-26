@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:49:48
+* @Last Modified time: 2018-05-26 15:59:36
 */
 
 import React from 'react';
@@ -35,7 +35,7 @@ class RandomWord extends React.Component {
     };
 };
 
-RandomWord.propTypes = {
+RandomWord.PropTypes = {
     id: PropTypes.number.isRequired,
     word: PropTypes.string.isRequired,
     isDisabled: PropTypes.bool.isRequired,

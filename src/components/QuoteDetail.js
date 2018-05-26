@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:49:18
+* @Last Modified time: 2018-05-26 15:59:20
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -97,7 +97,7 @@ class QuoteDetail extends React.Component {
     }
 }
 
-QuoteDetail.propTypes = {
+QuoteDetail.PropTypes = {
     quotes: PropTypes.array.isRequired,
     currentQuote: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,

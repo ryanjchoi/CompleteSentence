@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-21 15:50:13
+* @Last Modified time: 2018-05-26 15:59:41
 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ class SearchBar extends React.Component {
     }
 }
 
-SearchBar.propTypes = {
+SearchBar.PropTypes = {
     onSearch: PropTypes.func.isRequired,
 }
 
