@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-24 07:01:27
+* @Last Modified time: 2018-05-26 08:43:37
 */
 
 import React from 'react';
@@ -58,7 +58,7 @@ class Game extends React.Component {
     componentWillUpdate(nextProps, nextState) {
         if (
             nextState.selectedWords !== this.state.selectedWords ||
-            nextState.remainingSeconds === 0
+            this.remainingSeconds <= 0
         ) {
             this.gameStatus = this.calcGameStatus(nextState);
 
@@ -87,15 +87,12 @@ class Game extends React.Component {
         const mergeSelected = this.getMergeSelected(nextState);
         console.log("Ryan mergeSelected => ", mergeSelected);
 
-        if (mergeSelected.split(' ').length < this.words.length) {
-            return 'PLAYING';
-        }
-
         if (mergeSelected === sentence) {
             return 'WON';
         }
 
         const re = new RegExp(mergeSelected, 'i');
+
         if (sentence.search(re) !== 0) {
             return 'LOST';
         }
@@ -104,15 +101,15 @@ class Game extends React.Component {
             return 'LOST';
         }
 
+        if (mergeSelected.split(' ').length < this.words.length) {
+            return 'PLAYING';
+        }
+
         return 'LOST';
     };
 
     selectWord = (randomWord) => {
-        // this.shuffledWords = words.filter((word) => word !== randomWord);
-        this.shuffledWords.splice(
-            this.shuffledWords.indexOf(randomWord),
-            1
-        );
+        this.shuffledWords.splice( this.shuffledWords.indexOf(randomWord), 1 );
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: this.shuffledWords,
