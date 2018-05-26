@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:36
+* @Last Modified time: 2018-05-26 19:01:02
 */
 
 import React from 'react';
@@ -26,6 +26,7 @@ class Game extends React.Component {
         this.state = {
             selectedWords: [],
             shuffledWords: [],
+            shuffledObj: [],
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -110,14 +111,14 @@ class Game extends React.Component {
         return 'LOST';
     };
 
-    getShuffledObj = (arr) => arr.reduce((acc, cur, i) => {
-      acc[i] = cur;
-      return acc;
-    }, {});
+    getShuffledObj = (arr) => arr.reduce((acc, cur, index) => {
+        acc[index] = { index: cur };
+        return acc;
+    }, []);
 
-    selectWord = (randomWord) => {
+    selectWord = (randomWord, index) => {
         var shuffledWords = this.state.shuffledWords;
-        const shuffledObj = this.getShuffledObj(this.state.shuffledWords);
+        var shuffledObj = this.getShuffledObj(this.state.shuffledWords);
         console.log("Ryan shuffledObj => ", shuffledObj);
 
         if (shuffledWords.length > MAX_WORDS) {
@@ -126,6 +127,7 @@ class Game extends React.Component {
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: shuffledWords,
+            shuffledObj: shuffledObj,
         }));
     };
 
@@ -152,7 +154,7 @@ class Game extends React.Component {
                             isDisabled={
                                 this.isNumberSelected(index) || this.gameStatus !== 'PLAYING'
                             }
-                            onPress={() => this.selectWord(randomWord)}
+                            onPress={() => this.selectWord(randomWord, index)}
                         />
                     )}
                 </View>
