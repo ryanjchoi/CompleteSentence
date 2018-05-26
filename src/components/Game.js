@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:15
+* @Last Modified time: 2018-05-26 16:09:36
 */
 
 import React from 'react';
@@ -36,11 +36,12 @@ class Game extends React.Component {
             console.log(e);
         }
 
-        this.shuffledWords = shuffle(this.words);
-        this.setState({ shuffledWords: this.shuffledWords });
     }
 
     componentDidMount() {
+        const shuffledWords = shuffle(this.words);
+        this.setState({ shuffledWords: shuffledWords });
+
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
                 return { remainingSeconds: prevState.remainingSeconds - 1 };
@@ -115,15 +116,16 @@ class Game extends React.Component {
     }, {});
 
     selectWord = (randomWord) => {
-        const shuffledObj = this.getShuffledObj(this.shuffledWords);
+        var shuffledWords = this.state.shuffledWords;
+        const shuffledObj = this.getShuffledObj(this.state.shuffledWords);
         console.log("Ryan shuffledObj => ", shuffledObj);
 
-        if (this.shuffledWords.length > MAX_WORDS) {
-            this.shuffledWords.splice( this.shuffledWords.indexOf(randomWord), 1 );
+        if (shuffledWords.length > MAX_WORDS) {
+            shuffledWords.splice( shuffledWords.indexOf(randomWord), 1 );
         }
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
-            shuffledWords: this.shuffledWords,
+            shuffledWords: shuffledWords,
         }));
     };
 
@@ -142,7 +144,7 @@ class Game extends React.Component {
                     {this.getMergeSelected()}
                 </Text>
                 <View style={styles.wordsContainer}>
-                    {this.shuffledWords.map((randomWord, index) =>
+                    {this.state.shuffledWords.map((randomWord, index) =>
                         <RandomWord
                             key={index}
                             id={index}
