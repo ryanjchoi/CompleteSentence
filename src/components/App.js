@@ -2,11 +2,11 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:02:19
+* @Last Modified time: 2018-05-26 16:13:43
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import ajax from '../ajax';
 import QuoteList from './QuoteList';
@@ -89,9 +89,9 @@ class App extends React.Component {
     }
 }
 
-App.PropTypes = {
-    quotes: PropTypes.array.isRequired,
-    quote: PropTypes.object.isRequired,
+App.propTypes = {
+    quotes: propTypes.array.isRequired,
+    quote: propTypes.object.isRequired,
 }
 
 App.defaultProps = {

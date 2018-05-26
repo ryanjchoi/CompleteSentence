@@ -2,10 +2,10 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 11:37:16
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:31
+* @Last Modified time: 2018-05-26 16:13:39
 */
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { View, FlatList, StyleSheet } from 'react-native';
 import QuoteItem from './QuoteItem';
 
@@ -32,9 +32,9 @@ class QuoteList extends React.Component {
     }
 }
 
-QuoteList.PropTypes = {
-    quotes: PropTypes.array.isRequired,
-    onItemPress: PropTypes.func.isRequired,
+QuoteList.propTypes = {
+    quotes: propTypes.array.isRequired,
+    onItemPress: propTypes.func.isRequired,
 }
 
 QuoteList.defaultProps = {

@@ -2,10 +2,10 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:25
+* @Last Modified time: 2018-05-26 16:13:38
 */
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     View,
     Text,
@@ -44,10 +44,10 @@ class QuoteItem extends React.Component {
     }
 }
 
-QuoteItem.PropTypes = {
-    quotes: PropTypes.array.isRequired,
-    quote: PropTypes.object.isRequired,
-    onPress: PropTypes.func.isRequired,
+QuoteItem.propTypes = {
+    quotes: propTypes.array.isRequired,
+    quote: propTypes.object.isRequired,
+    onPress: propTypes.func.isRequired,
 }
 
 QuoteItem.defaultProps = {

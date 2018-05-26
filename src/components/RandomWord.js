@@ -2,11 +2,11 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:36
+* @Last Modified time: 2018-05-26 16:13:40
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     Text,
     StyleSheet,
@@ -35,11 +35,11 @@ class RandomWord extends React.Component {
     };
 };
 
-RandomWord.PropTypes = {
-    id: PropTypes.number.isRequired,
-    word: PropTypes.string.isRequired,
-    isDisabled: PropTypes.bool.isRequired,
-    onPress: PropTypes.func.isRequired,
+RandomWord.propTypes = {
+    id: propTypes.number.isRequired,
+    word: propTypes.string.isRequired,
+    isDisabled: propTypes.bool.isRequired,
+    onPress: propTypes.func.isRequired,
 };
 
 RandomWord.defaultProps = {

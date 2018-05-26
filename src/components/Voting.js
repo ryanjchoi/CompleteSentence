@@ -2,11 +2,11 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:46
+* @Last Modified time: 2018-05-26 16:13:35
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     View,
     Text,
@@ -90,9 +90,9 @@ class Voting extends React.Component {
     }
 }
 
-Voting.PropTypes = {
-    likeVote: PropTypes.number,
-    dislikeVote: PropTypes.number,
+Voting.propTypes = {
+    likeVote: propTypes.number,
+    dislikeVote: propTypes.number,
 }
 
 Voting.defaultProps = {

@@ -2,10 +2,10 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 15:59:41
+* @Last Modified time: 2018-05-26 16:13:41
 */
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 
 import { TextInput, StyleSheet } from 'react-native';
@@ -39,8 +39,8 @@ class SearchBar extends React.Component {
     }
 }
 
-SearchBar.PropTypes = {
-    onSearch: PropTypes.func.isRequired,
+SearchBar.propTypes = {
+    onSearch: propTypes.func.isRequired,
 }
 
 SearchBar.defaultProps = {

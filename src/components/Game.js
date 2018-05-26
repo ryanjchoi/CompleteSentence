@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:09:36
+* @Last Modified time: 2018-05-26 16:13:36
 */
 
 import React from 'react';
@@ -12,7 +12,7 @@ import {
     Button,
     StyleSheet
 } from 'react-native';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
 import Voting from './Voting';
@@ -172,12 +172,12 @@ class Game extends React.Component {
     };
 }
 
-Game.PropTypes = {
-    sentence: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    initialSeconds: PropTypes.number.isRequired,
-    onPlayAgain: PropTypes.func.isRequired,
-    onNextQuote: PropTypes.func.isRequired,
+Game.propTypes = {
+    sentence: propTypes.string.isRequired,
+    author: propTypes.string.isRequired,
+    initialSeconds: propTypes.number.isRequired,
+    onPlayAgain: propTypes.func.isRequired,
+    onNextQuote: propTypes.func.isRequired,
 }
 
 Game.defaultProps = {
