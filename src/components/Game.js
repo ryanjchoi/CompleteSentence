@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 08:43:37
+* @Last Modified time: 2018-05-26 08:51:47
 */
 
 import React from 'react';
@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 import RandomWord from './RandomWord';
 import Voting from './Voting';
+import { MAX_WORDS } from './constants';
 
 class Game extends React.Component {
 
@@ -109,7 +110,10 @@ class Game extends React.Component {
     };
 
     selectWord = (randomWord) => {
-        this.shuffledWords.splice( this.shuffledWords.indexOf(randomWord), 1 );
+        console.log("Ryan this.shuffledWords => ", this.shuffledWords);
+        if (this.shuffledWords.length > MAX_WORDS) {
+            this.shuffledWords.splice( this.shuffledWords.indexOf(randomWord), 1 );
+        }
         this.setState((prevState) => ({
             selectedWords: [...prevState.selectedWords, randomWord],
             shuffledWords: this.shuffledWords,

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-07 06:46:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 13:41:09
+* @Last Modified time: 2018-05-26 08:51:07
 */
 
 export const BELT_SECONDS = {
@@ -24,3 +24,5 @@ export const BELT_MAX_WORDS = {
     RED: 27,
     BLACK: 40,
 };
+
+export const MAX_WORDS = 12;
