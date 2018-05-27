@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 16:24:20
+* @Last Modified time: 2018-05-27 16:44:05
 */
 
 import React from 'react';
@@ -61,6 +61,8 @@ class Game extends React.Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
+        console.log("Ryan nextState.selectedKeys => ", nextState.selectedKeys);
+        console.log("Ryan this.state.selectedKeys => ", this.state.selectedKeys);
         if (
             nextState.selectedWords !== this.state.selectedWords
             || this.remainingSeconds <= 0
@@ -135,7 +137,6 @@ class Game extends React.Component {
         var selectedObj = this.state.selectedObj;
         selectedObj[key] = shuffledObj[key];
         this.setState((prevState) => ({
-            selectedObj: selectedObj,
             selectedKeys: selectedKeys,
         }));
 
