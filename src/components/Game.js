@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 16:04:02
+* @Last Modified time: 2018-05-27 16:24:20
 */
 
 import React from 'react';
@@ -26,6 +26,7 @@ class Game extends React.Component {
         this.state = {
             selectedWords: [],
             selectedObj: {},
+            selectedKeys: [],
             shuffledWords: [],
             shuffledObj: [],
             remainingSeconds: this.props.initialSeconds,
@@ -83,12 +84,16 @@ class Game extends React.Component {
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
-        const mergeSelected = nextState.selectedWords.reduce((accumulator, currentValue) => {
+
+        var selectedKeys = this.state.selectedKeys;
+        var selectedObj = this.state.selectedObj;
+        const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
+            var word = selectedObj[''+key];
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            return `${accumulator} ${currentValue}`.trim();
+            return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
         return mergeSelected;
@@ -121,6 +126,9 @@ class Game extends React.Component {
     }
 
     selectWord = (key) => {
+        var selectedKeys = this.state.selectedKeys;
+        selectedKeys.push(key);
+
         var shuffledObj = this.state.shuffledObj;
         var size = Object.keys(shuffledObj).length;
 
@@ -128,6 +136,7 @@ class Game extends React.Component {
         selectedObj[key] = shuffledObj[key];
         this.setState((prevState) => ({
             selectedObj: selectedObj,
+            selectedKeys: selectedKeys,
         }));
 
         if (size > MAX_WORDS) {
