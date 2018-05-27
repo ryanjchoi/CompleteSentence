@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 14:42:52
+* @Last Modified time: 2018-05-27 16:04:02
 */
 
 import React from 'react';
@@ -25,6 +25,7 @@ class Game extends React.Component {
 
         this.state = {
             selectedWords: [],
+            selectedObj: {},
             shuffledWords: [],
             shuffledObj: [],
             remainingSeconds: this.props.initialSeconds,
@@ -60,8 +61,8 @@ class Game extends React.Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (
-            nextState.selectedWords !== this.state.selectedWords ||
-            this.remainingSeconds <= 0
+            nextState.selectedWords !== this.state.selectedWords
+            || this.remainingSeconds <= 0
         ) {
             this.gameStatus = this.calcGameStatus(nextState);
 
@@ -75,7 +76,7 @@ class Game extends React.Component {
         clearInterval(this.intervalId);
     }
 
-    getShuffledObj = (arr) => arr.reduce(function(acc, cur, i) {
+    getShuffledObj = (arr) => arr.reduce((acc, cur, i) => {
         acc[i] = cur;
         return acc;
     }, {});
@@ -123,6 +124,12 @@ class Game extends React.Component {
         var shuffledObj = this.state.shuffledObj;
         var size = Object.keys(shuffledObj).length;
 
+        var selectedObj = this.state.selectedObj;
+        selectedObj[key] = shuffledObj[key];
+        this.setState((prevState) => ({
+            selectedObj: selectedObj,
+        }));
+
         if (size > MAX_WORDS) {
             delete shuffledObj[key];
 
@@ -133,11 +140,7 @@ class Game extends React.Component {
     }
 
     isNumberSelected = (key) => {
-        // var shuffledObj = this.state.shuffledObj;
-        // console.log("Ryan key => ", key);
-        // console.log("Ryan shuffledObj[key] => ", shuffledObj[key]);
-        return false;
-        // return this.state.selectedWords.indexOf(wordIndex) >= 0;
+        return !!(this.state.selectedObj['' + key]);
     }
 
     render() {
