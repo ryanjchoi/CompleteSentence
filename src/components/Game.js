@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 16:44:05
+* @Last Modified time: 2018-05-27 17:57:23
 */
 
 import React from 'react';
@@ -89,6 +89,7 @@ class Game extends React.Component {
 
         var selectedKeys = this.state.selectedKeys;
         var selectedObj = this.state.selectedObj;
+
         const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
             var word = selectedObj[''+key];
             // Remove the default message when starts
@@ -135,9 +136,9 @@ class Game extends React.Component {
         var size = Object.keys(shuffledObj).length;
 
         var selectedObj = this.state.selectedObj;
-        selectedObj[key] = shuffledObj[key];
+
         this.setState((prevState) => ({
-            selectedKeys: selectedKeys,
+            selectedKeys: [...prevState.selectedKeys, shuffledObj[key]],
         }));
 
         if (size > MAX_WORDS) {
