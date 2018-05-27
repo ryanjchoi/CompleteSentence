@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 19:22:33
+* @Last Modified time: 2018-05-27 14:42:52
 */
 
 import React from 'react';
@@ -75,13 +75,10 @@ class Game extends React.Component {
         clearInterval(this.intervalId);
     }
 
-    getShuffledObj = (arr) => arr.reduce((acc, cur, index) => {
-        var obj = {};
-        var key = '' + index;
-        obj[key] = cur;
-        acc[index] = obj;
+    getShuffledObj = (arr) => arr.reduce(function(acc, cur, i) {
+        acc[i] = cur;
         return acc;
-    }, []);
+    }, {});
 
     getMergeSelected = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
@@ -122,25 +119,29 @@ class Game extends React.Component {
         return 'LOST';
     }
 
-    selectWord = (randomWord, index) => {
-        var shuffledWords = this.state.shuffledWords;
+    selectWord = (key) => {
+        var shuffledObj = this.state.shuffledObj;
+        var size = Object.keys(shuffledObj).length;
 
-        if (shuffledWords.length > MAX_WORDS) {
-            shuffledWords.splice(shuffledWords.indexOf(randomWord), 1);
+        if (size > MAX_WORDS) {
+            delete shuffledObj[key];
+
+            this.setState((prevState) => ({
+                shuffledObj: shuffledObj,
+            }));
         }
-        this.setState((prevState) => ({
-            selectedWords: [...prevState.selectedWords, randomWord],
-            shuffledWords: shuffledWords,
-        }));
     }
 
-    isNumberSelected = (wordIndex) => {
-
+    isNumberSelected = (key) => {
+        // var shuffledObj = this.state.shuffledObj;
+        // console.log("Ryan key => ", key);
+        // console.log("Ryan shuffledObj[key] => ", shuffledObj[key]);
         return false;
         // return this.state.selectedWords.indexOf(wordIndex) >= 0;
     }
 
     render() {
+        var shuffledObj = this.state.shuffledObj;
         return (
             <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
@@ -149,17 +150,19 @@ class Game extends React.Component {
                     {this.getMergeSelected()}
                 </Text>
                 <View style={styles.wordsContainer}>
-                    {this.state.shuffledWords.map((randomWord, index) =>
-                        <RandomWord
-                            key={index}
-                            id={index}
-                            word={randomWord}
-                            isDisabled={
-                                this.isNumberSelected(index) || this.gameStatus !== 'PLAYING'
-                            }
-                            onPress={() => this.selectWord(randomWord, index)}
-                        />
-                    )}
+                    {
+                        Object.keys(shuffledObj).map((key, index) => {
+                            return (<RandomWord
+                                key={index}
+                                id={index}
+                                word={shuffledObj[key]}
+                                isDisabled={
+                                    this.isNumberSelected(key) || this.gameStatus !== 'PLAYING'
+                                }
+                                onPress={() => this.selectWord(key)}
+                            />)
+                        })
+                    }
                 </View>
                 <View style={styles.buttonContainer}>
                     <Text style={styles.remainingSeconds}>{this.state.remainingSeconds}</Text>
