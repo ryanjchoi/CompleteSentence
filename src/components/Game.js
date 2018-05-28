@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 21:40:59
+* @Last Modified time: 2018-05-27 21:58:50
 */
 
 import React from 'react';
@@ -24,11 +24,9 @@ class Game extends React.Component {
         super(props);
 
         this.state = {
-            selectedWords: [],
-            selectedObj: {},
             selectedKeys: [],
             shuffledWords: [],
-            shuffledObj: [],
+            shuffledObj: {},
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -43,7 +41,7 @@ class Game extends React.Component {
     componentDidMount() {
         const shuffledWords = shuffle(this.words);
         const shuffledObj = this.getShuffledObj(shuffledWords);
-
+        console.log("Ryan shuffledObj => ", shuffledObj);
         this.setState({
             shuffledWords: shuffledWords,
             shuffledObj: shuffledObj,
@@ -94,6 +92,7 @@ class Game extends React.Component {
                 accumulator = '';
             }
             var word = shuffledObj[''+key];
+            console.log("Ryan word => ", word);
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
