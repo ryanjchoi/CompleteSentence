@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 21:23:28
+* @Last Modified time: 2018-05-27 21:34:21
 */
 
 import React from 'react';
@@ -62,7 +62,7 @@ class Game extends React.Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (
-            nextState.selectedWords !== this.state.selectedWords
+            nextState.selectedKeys !== this.state.selectedKeys
             || this.remainingSeconds <= 0
         ) {
             this.gameStatus = this.calcGameStatus(nextState);
@@ -86,15 +86,14 @@ class Game extends React.Component {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
         var selectedKeys = this.state.selectedKeys;
-        var selectedObj = this.state.selectedObj;
-        console.log("Ryan selectedKeys => ", selectedKeys);
+        var shuffledObj = this.state.shuffledObj;
 
         const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
-            var word = selectedObj[''+key];
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
+            var word = shuffledObj[''+key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
@@ -105,6 +104,7 @@ class Game extends React.Component {
     calcGameStatus = (nextState) => {
         const { sentence } = this.props;
         const mergeSelected = this.getMergeSelected(nextState);
+        console.log("Ryan mergeSelected => ", mergeSelected);
 
         if (mergeSelected === sentence) {
             return 'WON';
