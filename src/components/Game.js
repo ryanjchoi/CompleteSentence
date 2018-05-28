@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 21:58:50
+* @Last Modified time: 2018-05-28 06:50:04
 */
 
 import React from 'react';
@@ -25,8 +25,8 @@ class Game extends React.Component {
 
         this.state = {
             selectedKeys: [],
-            shuffledWords: [],
-            shuffledObj: {},
+            wordsArr: [],
+            wordsObj: {},
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -39,12 +39,12 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        const shuffledWords = shuffle(this.words);
-        const shuffledObj = this.getShuffledObj(shuffledWords);
-        console.log("Ryan shuffledObj => ", shuffledObj);
+        const wordsArr = shuffle(this.words);
+        const wordsObj = this.getShuffledObj(wordsArr);
+        console.log("Ryan wordsObj => ", wordsObj);
         this.setState({
-            shuffledWords: shuffledWords,
-            shuffledObj: shuffledObj,
+            wordsArr: wordsArr,
+            wordsObj: wordsObj,
         });
 
         this.intervalId = setInterval(() => {
@@ -84,14 +84,14 @@ class Game extends React.Component {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
         var selectedKeys = this.state.selectedKeys;
-        var shuffledObj = this.state.shuffledObj;
+        var wordsObj = this.state.wordsObj;
 
         const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            var word = shuffledObj[''+key];
+            var word = wordsObj[''+key];
             console.log("Ryan word => ", word);
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
@@ -130,13 +130,13 @@ class Game extends React.Component {
             selectedKeys: [...prevState.selectedKeys, key],
         }));
 
-        var shuffledObj = this.state.shuffledObj;
-        var size = Object.keys(shuffledObj).length;
+        var wordsObj = this.state.wordsObj;
+        var size = Object.keys(wordsObj).length;
         if (size > MAX_WORDS) {
-            delete shuffledObj[key];
+            delete wordsObj[key];
 
             this.setState((prevState) => ({
-                shuffledObj: shuffledObj,
+                wordsObj: wordsObj,
             }));
         }
     }
@@ -146,7 +146,7 @@ class Game extends React.Component {
     }
 
     render() {
-        var shuffledObj = this.state.shuffledObj;
+        var wordsObj = this.state.wordsObj;
         return (
             <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
@@ -156,11 +156,11 @@ class Game extends React.Component {
                 </Text>
                 <View style={styles.wordsContainer}>
                     {
-                        Object.keys(shuffledObj).map((key, index) => {
+                        Object.keys(wordsObj).map((key, index) => {
                             return (<RandomWord
                                 key={index}
                                 id={index}
-                                word={shuffledObj[key]}
+                                word={wordsObj[key]}
                                 isDisabled={
                                     this.isNumberSelected(key) || this.gameStatus !== 'PLAYING'
                                 }
