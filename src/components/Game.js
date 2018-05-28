@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 06:57:07
+* @Last Modified time: 2018-05-28 07:02:39
 */
 
 import React from 'react';
@@ -91,7 +91,6 @@ class Game extends React.Component {
                 accumulator = '';
             }
             var word = wordsObj[''+key];
-            console.log("Ryan word => ", word);
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
         console.log("Ryan mergedSentence => ", mergedSentence);

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:43
+* @Last Modified time: 2018-05-28 07:01:41
 */
 
 import React from 'react';
@@ -33,21 +33,6 @@ class App extends React.Component {
         this.setState({ quote });
     }
 
-    unSetQuote = () => {
-        this.setState({
-            quote: null,
-        });
-    }
-
-    searchQuotes = async (searchTerm) => {
-        let quotes = [];
-        if (searchTerm) {
-            quotes = await ajax.fetchQuotes(searchTerm);
-        }
-        if(quotes.length === 0) return; //TODO: add message for no quote returning from the search term.
-        this.setState({ quotes });
-    }
-
     getQuote = () => this.state.quotes.find(
         (quote) => {
             if (quote._id === this.state.quote._id) {
@@ -55,6 +40,21 @@ class App extends React.Component {
             }
         }
     )
+
+    searchQuotes = async (searchTerm) => {
+        let quotes = [];
+        if (searchTerm) {
+            quotes = await ajax.fetchQuotes(searchTerm);
+        }
+        if (quotes.length === 0) return; //TODO: add message for no quote returning from the search term.
+        this.setState({ quotes });
+    }
+
+    unSetQuote = () => {
+        this.setState({
+            quote: null,
+        });
+    }
 
     render() {
         if (!!this.state.quote) {
@@ -92,12 +92,12 @@ class App extends React.Component {
 App.propTypes = {
     quotes: propTypes.array.isRequired,
     quote: propTypes.object.isRequired,
-}
+};
 
 App.defaultProps = {
     quotes: [],
     quote: {},
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 40,
     },
-})
+});
 
 export default App;
