@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 17:57:23
+* @Last Modified time: 2018-05-27 21:23:28
 */
 
 import React from 'react';
@@ -61,8 +61,6 @@ class Game extends React.Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log("Ryan nextState.selectedKeys => ", nextState.selectedKeys);
-        console.log("Ryan this.state.selectedKeys => ", this.state.selectedKeys);
         if (
             nextState.selectedWords !== this.state.selectedWords
             || this.remainingSeconds <= 0
@@ -89,6 +87,7 @@ class Game extends React.Component {
 
         var selectedKeys = this.state.selectedKeys;
         var selectedObj = this.state.selectedObj;
+        console.log("Ryan selectedKeys => ", selectedKeys);
 
         const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
             var word = selectedObj[''+key];
@@ -129,18 +128,12 @@ class Game extends React.Component {
     }
 
     selectWord = (key) => {
-        var selectedKeys = this.state.selectedKeys;
-        selectedKeys.push(key);
+        this.setState((prevState) => ({
+            selectedKeys: [...prevState.selectedKeys, key],
+        }));
 
         var shuffledObj = this.state.shuffledObj;
         var size = Object.keys(shuffledObj).length;
-
-        var selectedObj = this.state.selectedObj;
-
-        this.setState((prevState) => ({
-            selectedKeys: [...prevState.selectedKeys, shuffledObj[key]],
-        }));
-
         if (size > MAX_WORDS) {
             delete shuffledObj[key];
 
