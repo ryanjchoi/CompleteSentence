@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 06:50:04
+* @Last Modified time: 2018-05-28 06:57:07
 */
 
 import React from 'react';
@@ -41,7 +41,6 @@ class Game extends React.Component {
     componentDidMount() {
         const wordsArr = shuffle(this.words);
         const wordsObj = this.getShuffledObj(wordsArr);
-        console.log("Ryan wordsObj => ", wordsObj);
         this.setState({
             wordsArr: wordsArr,
             wordsObj: wordsObj,
@@ -63,7 +62,7 @@ class Game extends React.Component {
             nextState.selectedKeys !== this.state.selectedKeys
             || this.remainingSeconds <= 0
         ) {
-            this.gameStatus = this.calcGameStatus(nextState);
+            this.gameStatus = this.getGameStatus(nextState);
 
             if (this.gameStatus !== 'PLAYING') {
                 clearInterval(this.intervalId);
@@ -80,13 +79,13 @@ class Game extends React.Component {
         return acc;
     }, {});
 
-    getMergeSelected = (nextState = this.state) => {
+    getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
         var selectedKeys = this.state.selectedKeys;
         var wordsObj = this.state.wordsObj;
 
-        const mergeSelected = nextState.selectedKeys.reduce((accumulator, key) => {
+        const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
@@ -95,20 +94,21 @@ class Game extends React.Component {
             console.log("Ryan word => ", word);
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
+        console.log("Ryan mergedSentence => ", mergedSentence);
 
-        return mergeSelected;
+        return mergedSentence;
     }
 
     // gameStatus: PLAYING, WON, LOST
-    calcGameStatus = (nextState) => {
+    getGameStatus = (nextState) => {
         const { sentence } = this.props;
-        const mergeSelected = this.getMergeSelected(nextState);
+        const mergedSentence = this.getMergedSentence(nextState);
 
-        if (mergeSelected === sentence) {
+        if (mergedSentence === sentence) {
             return 'WON';
         }
 
-        const re = new RegExp(mergeSelected, 'i');
+        const re = new RegExp(mergedSentence, 'i');
 
         if (sentence.search(re) !== 0) {
             return 'LOST';
@@ -118,7 +118,7 @@ class Game extends React.Component {
             return 'LOST';
         }
 
-        if (mergeSelected.split(' ').length < this.words.length) {
+        if (mergedSentence.split(' ').length < this.words.length) {
             return 'PLAYING';
         }
 
@@ -152,7 +152,7 @@ class Game extends React.Component {
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
                 <Text style={styles.author}>- {this.props.author}</Text>
                 <Text style={[styles.merged, styles[`STATUS_${this.gameStatus}`]]}>
-                    {this.getMergeSelected()}
+                    {this.getMergedSentence()}
                 </Text>
                 <View style={styles.wordsContainer}>
                     {
