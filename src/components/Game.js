@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-27 21:34:21
+* @Last Modified time: 2018-05-27 21:40:59
 */
 
 import React from 'react';
@@ -104,7 +104,6 @@ class Game extends React.Component {
     calcGameStatus = (nextState) => {
         const { sentence } = this.props;
         const mergeSelected = this.getMergeSelected(nextState);
-        console.log("Ryan mergeSelected => ", mergeSelected);
 
         if (mergeSelected === sentence) {
             return 'WON';
@@ -144,7 +143,7 @@ class Game extends React.Component {
     }
 
     isNumberSelected = (key) => {
-        return !!(this.state.selectedObj['' + key]);
+        return (this.state.selectedKeys.indexOf(key) !== -1);
     }
 
     render() {
