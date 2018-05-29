@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:35
+* @Last Modified time: 2018-05-29 07:04:44
 */
 
 import React from 'react';
@@ -93,12 +93,12 @@ class Voting extends React.Component {
 Voting.propTypes = {
     likeVote: propTypes.number,
     dislikeVote: propTypes.number,
-}
+};
 
 Voting.defaultProps = {
     likeVote: 0,
     dislikeVote: 0,
-}
+};
 
 const styles = StyleSheet.create({
     voteContainer: {
@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     like: {
 
     },
-})
+});
 
-export default Voting
+export default Voting;

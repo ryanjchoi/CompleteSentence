@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:38
+* @Last Modified time: 2018-05-29 07:03:27
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -48,12 +48,12 @@ QuoteItem.propTypes = {
     quotes: propTypes.array.isRequired,
     quote: propTypes.object.isRequired,
     onPress: propTypes.func.isRequired,
-}
+};
 
 QuoteItem.defaultProps = {
     quotes: [],
     quote: {},
-}
+};
 
 const styles = StyleSheet.create({
     quote: {
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#ccc',
     },
-
 });
 
-export default QuoteItem
+export default QuoteItem;

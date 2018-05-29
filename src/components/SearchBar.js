@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:41
+* @Last Modified time: 2018-05-29 07:04:22
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -41,17 +41,17 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
     onSearch: propTypes.func.isRequired,
-}
+};
 
 SearchBar.defaultProps = {
 
-}
+};
 
 const styles = StyleSheet.create({
     input: {
         height: 40,
         marginHorizontal: 12,
     },
-})
+});
 
-export default SearchBar
+export default SearchBar;

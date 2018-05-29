@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 21:36:16
+* @Last Modified time: 2018-05-29 07:02:47
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -93,12 +93,12 @@ QuoteDetail.propTypes = {
     quotes: propTypes.array.isRequired,
     currentQuote: propTypes.object.isRequired,
     onBack: propTypes.func.isRequired,
-}
+};
 
 QuoteDetail.defaultProps = {
     quotes: [],
     currentQuote: {},
-}
+};
 
 const styles = StyleSheet.create({
     detailContainer: {
@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
         height: 60,
         backgroundColor: '#ccc',
     },
-
 });
 
-export default QuoteDetail
+export default QuoteDetail;

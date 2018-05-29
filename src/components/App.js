@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 07:01:41
+* @Last Modified time: 2018-05-29 06:58:29
 */
 
 import React from 'react';
@@ -46,7 +46,8 @@ class App extends React.Component {
         if (searchTerm) {
             quotes = await ajax.fetchQuotes(searchTerm);
         }
-        if (quotes.length === 0) return; //TODO: add message for no quote returning from the search term.
+        if (quotes.length === 0) return;
+        //TODO: add message for no quote returning from the search term.
         this.setState({ quotes });
     }
 
@@ -57,7 +58,7 @@ class App extends React.Component {
     }
 
     render() {
-        if (!!this.state.quote) {
+        if (!! this.state.quote) {
             return (
                 <View style={styles.main}>
                     <QuoteDetail

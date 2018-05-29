@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 14:53:35
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:40
+* @Last Modified time: 2018-05-29 07:04:05
 */
 
 import React from 'react';
@@ -32,8 +32,8 @@ class RandomWord extends React.Component {
                 </Text>
             </TouchableOpacity>
         );
-    };
-};
+    }
+}
 
 RandomWord.propTypes = {
     id: propTypes.number.isRequired,
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RandomWord
+export default RandomWord;

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 21:48:54
+* @Last Modified time: 2018-05-29 07:01:20
 */
 
 import React from 'react';
@@ -136,8 +136,7 @@ class Game extends React.Component {
 
     isNumberSelected = (key) => (
         this.state.selectedKeys.indexOf(key) !== -1
-    );
-
+    )
 
     render() {
         const wordsObj = this.state.wordsObj;
@@ -209,7 +208,6 @@ const styles = StyleSheet.create({
     remainingSeconds: {
         fontSize: 20,
         fontWeight: 'bold',
-
     },
 
     sentence: {
