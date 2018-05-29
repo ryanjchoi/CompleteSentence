@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-26 16:13:37
+* @Last Modified time: 2018-05-28 21:36:16
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -57,14 +57,6 @@ class QuoteDetail extends React.Component {
 
             quote = quotes[++this.qindex];
             this.setState({quote});
-
-            if (
-                quote.sentence === prevState.quote.sentence ||
-                quote.sentence.split(' ').length > CONSTANTS.BELT_MAX_WORDS.WHITE
-            ) {
-                // this.loadNextQuote();
-                return;
-            }
 
             return {
                 gameId: prevState.gameId + 1,
