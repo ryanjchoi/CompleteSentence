@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 07:02:39
+* @Last Modified time: 2018-05-28 21:17:26
 */
 
 import React from 'react';
@@ -25,7 +25,7 @@ class Game extends React.Component {
 
         this.state = {
             selectedKeys: [],
-            wordsArr: [],
+            wordsBk: {},
             wordsObj: {},
             remainingSeconds: this.props.initialSeconds,
         };
@@ -39,10 +39,11 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        const wordsArr = shuffle(this.words);
-        const wordsObj = this.getShuffledObj(wordsArr);
+        const shuffledWords = shuffle(this.words);
+        const wordsBk = this.getShuffledObj(shuffledWords);
+        const wordsObj = this.getShuffledObj(shuffledWords);
         this.setState({
-            wordsArr: wordsArr,
+            wordsBk: wordsBk,
             wordsObj: wordsObj,
         });
 
@@ -83,17 +84,16 @@ class Game extends React.Component {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
         var selectedKeys = this.state.selectedKeys;
-        var wordsObj = this.state.wordsObj;
+        var wordsBk = this.state.wordsBk;
 
         const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            var word = wordsObj[''+key];
+            var word = wordsBk[''+key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
-        console.log("Ryan mergedSentence => ", mergedSentence);
 
         return mergedSentence;
     }
