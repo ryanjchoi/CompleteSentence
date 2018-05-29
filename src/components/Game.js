@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-28 21:17:26
+* @Last Modified time: 2018-05-28 21:48:54
 */
 
 import React from 'react';
@@ -42,10 +42,7 @@ class Game extends React.Component {
         const shuffledWords = shuffle(this.words);
         const wordsBk = this.getShuffledObj(shuffledWords);
         const wordsObj = this.getShuffledObj(shuffledWords);
-        this.setState({
-            wordsBk: wordsBk,
-            wordsObj: wordsObj,
-        });
+        this.setState({ wordsBk, wordsObj });
 
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
@@ -83,15 +80,14 @@ class Game extends React.Component {
     getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
-        var selectedKeys = this.state.selectedKeys;
-        var wordsBk = this.state.wordsBk;
+        const wordsBk = this.state.wordsBk;
 
         const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            var word = wordsBk[''+key];
+            const word = wordsBk[key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
@@ -129,23 +125,22 @@ class Game extends React.Component {
             selectedKeys: [...prevState.selectedKeys, key],
         }));
 
-        var wordsObj = this.state.wordsObj;
-        var size = Object.keys(wordsObj).length;
+        const wordsObj = this.state.wordsObj;
+        const size = Object.keys(wordsObj).length;
         if (size > MAX_WORDS) {
             delete wordsObj[key];
 
-            this.setState((prevState) => ({
-                wordsObj: wordsObj,
-            }));
+            this.setState({ wordsObj });
         }
     }
 
-    isNumberSelected = (key) => {
-        return (this.state.selectedKeys.indexOf(key) !== -1);
-    }
+    isNumberSelected = (key) => (
+        this.state.selectedKeys.indexOf(key) !== -1
+    );
+
 
     render() {
-        var wordsObj = this.state.wordsObj;
+        const wordsObj = this.state.wordsObj;
         return (
             <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
@@ -155,8 +150,8 @@ class Game extends React.Component {
                 </Text>
                 <View style={styles.wordsContainer}>
                     {
-                        Object.keys(wordsObj).map((key, index) => {
-                            return (<RandomWord
+                        Object.keys(wordsObj).map((key, index) => (
+                            <RandomWord
                                 key={index}
                                 id={index}
                                 word={wordsObj[key]}
@@ -164,8 +159,8 @@ class Game extends React.Component {
                                     this.isNumberSelected(key) || this.gameStatus !== 'PLAYING'
                                 }
                                 onPress={() => this.selectWord(key)}
-                            />)
-                        })
+                            />
+                        ))
                     }
                 </View>
                 <View style={styles.buttonContainer}>
@@ -193,8 +188,8 @@ Game.propTypes = {
 };
 
 Game.defaultProps = {
-    sentence: "",
-    author: "",
+    sentence: '',
+    author: '',
     initialSeconds: 0,
 };
 
