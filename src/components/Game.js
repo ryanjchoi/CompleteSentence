@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 07:01:20
+* @Last Modified time: 2018-05-29 21:45:30
 */
 
 import React from 'react';
@@ -25,7 +25,7 @@ class Game extends React.Component {
 
         this.state = {
             selectedKeys: [],
-            wordsBk: {},
+            wordsTotal: {},
             wordsObj: {},
             remainingSeconds: this.props.initialSeconds,
         };
@@ -39,10 +39,12 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        const shuffledWords = shuffle(this.words);
-        const wordsBk = this.getShuffledObj(shuffledWords);
-        const wordsObj = this.getShuffledObj(shuffledWords);
-        this.setState({ wordsBk, wordsObj });
+        const wordsHead = this.words.slice(0, MAX_WORDS);
+        const wordsTail = this.words.slice(MAX_WORDS);
+        const wordsShuffle = shuffle(wordsHead);
+        const wordsObj = this.getShuffledObj(wordsShuffle);
+        const wordsTotal = this.getShuffledObj(wordsShuffle);
+        this.setState({ wordsTotal, wordsObj });
 
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
@@ -80,14 +82,14 @@ class Game extends React.Component {
     getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
-        const wordsBk = this.state.wordsBk;
+        const wordsTotal = this.state.wordsTotal;
 
         const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            const word = wordsBk[key];
+            const word = wordsTotal[key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
