@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 21:45:30
+* @Last Modified time: 2018-05-29 21:57:03
 */
 
 import React from 'react';
@@ -25,8 +25,9 @@ class Game extends React.Component {
 
         this.state = {
             selectedKeys: [],
-            wordsTotal: {},
-            wordsObj: {},
+            wordsTotalObj: {},
+            wordsHeadObj: {},
+            wordsTailObj: {},
             remainingSeconds: this.props.initialSeconds,
         };
 
@@ -42,9 +43,12 @@ class Game extends React.Component {
         const wordsHead = this.words.slice(0, MAX_WORDS);
         const wordsTail = this.words.slice(MAX_WORDS);
         const wordsShuffle = shuffle(wordsHead);
-        const wordsObj = this.getShuffledObj(wordsShuffle);
-        const wordsTotal = this.getShuffledObj(wordsShuffle);
-        this.setState({ wordsTotal, wordsObj });
+        const wordsHeadObj = this.getShuffledObj(wordsShuffle);
+        const wordsTailObj = this.getShuffledObj(wordsTail);
+        const wordsFullArr = wordsShuffle.concat(wordsTail);
+        const wordsTotalObj = this.getShuffledObj(wordsFullArr);
+
+        this.setState({ wordsTotalObj, wordsHeadObj, wordsTailObj });
 
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
@@ -82,14 +86,14 @@ class Game extends React.Component {
     getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
-        const wordsTotal = this.state.wordsTotal;
+        const wordsTotalObj = this.state.wordsTotalObj;
 
         const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            const word = wordsTotal[key];
+            const word = wordsTotalObj[key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
@@ -127,12 +131,12 @@ class Game extends React.Component {
             selectedKeys: [...prevState.selectedKeys, key],
         }));
 
-        const wordsObj = this.state.wordsObj;
-        const size = Object.keys(wordsObj).length;
+        const wordsHeadObj = this.state.wordsHeadObj;
+        const size = Object.keys(wordsHeadObj).length;
         if (size > MAX_WORDS) {
-            delete wordsObj[key];
+            delete wordsHeadObj[key];
 
-            this.setState({ wordsObj });
+            this.setState({ wordsHeadObj });
         }
     }
 
@@ -141,7 +145,7 @@ class Game extends React.Component {
     )
 
     render() {
-        const wordsObj = this.state.wordsObj;
+        const wordsHeadObj = this.state.wordsHeadObj;
         return (
             <View style={styles.gameContainer}>
                 <Text style={styles.sentence}>{this.props.sentence}</Text>
@@ -151,11 +155,11 @@ class Game extends React.Component {
                 </Text>
                 <View style={styles.wordsContainer}>
                     {
-                        Object.keys(wordsObj).map((key, index) => (
+                        Object.keys(wordsHeadObj).map((key, index) => (
                             <RandomWord
                                 key={index}
                                 id={index}
-                                word={wordsObj[key]}
+                                word={wordsHeadObj[key]}
                                 isDisabled={
                                     this.isNumberSelected(key) || this.gameStatus !== 'PLAYING'
                                 }
