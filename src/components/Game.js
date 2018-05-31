@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 21:57:03
+* @Last Modified time: 2018-05-30 07:01:54
 */
 
 import React from 'react';
@@ -25,7 +25,7 @@ class Game extends React.Component {
 
         this.state = {
             selectedKeys: [],
-            wordsTotalObj: {},
+            wordsFullObj: {},
             wordsHeadObj: {},
             wordsTailObj: {},
             remainingSeconds: this.props.initialSeconds,
@@ -40,15 +40,15 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        const wordsHead = this.words.slice(0, MAX_WORDS);
-        const wordsTail = this.words.slice(MAX_WORDS);
-        const wordsShuffle = shuffle(wordsHead);
-        const wordsHeadObj = this.getShuffledObj(wordsShuffle);
-        const wordsTailObj = this.getShuffledObj(wordsTail);
-        const wordsFullArr = wordsShuffle.concat(wordsTail);
-        const wordsTotalObj = this.getShuffledObj(wordsFullArr);
+        const wordsHeadArr = shuffle(this.words.slice(0, MAX_WORDS));
+        const wordsTailArr = this.words.slice(MAX_WORDS);
+        const wordsFullArr = wordsHeadArr.concat(wordsTailArr);
 
-        this.setState({ wordsTotalObj, wordsHeadObj, wordsTailObj });
+        const wordsHeadObj = this.getShuffledObj(wordsHeadArr);
+        const wordsTailObj = this.getShuffledObj(wordsTailArr);
+        const wordsFullObj = this.getShuffledObj(wordsFullArr);
+
+        this.setState({ wordsFullObj, wordsHeadObj, wordsTailObj });
 
         this.intervalId = setInterval(() => {
             this.setState((prevState) => {
@@ -86,14 +86,14 @@ class Game extends React.Component {
     getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
 
-        const wordsTotalObj = this.state.wordsTotalObj;
+        const wordsFullObj = this.state.wordsFullObj;
 
         const mergedSentence = nextState.selectedKeys.reduce((accumulator, key) => {
             // Remove the default message when starts
             if (accumulator === defaultMessage) {
                 accumulator = '';
             }
-            const word = wordsTotalObj[key];
+            const word = wordsFullObj[key];
             return `${accumulator} ${word}`.trim();
         }, defaultMessage);
 
@@ -132,8 +132,10 @@ class Game extends React.Component {
         }));
 
         const wordsHeadObj = this.state.wordsHeadObj;
-        const size = Object.keys(wordsHeadObj).length;
-        if (size > MAX_WORDS) {
+        const wordsTailObj = this.state.wordsTailObj;
+        const size = Object.keys(wordsTailObj).length;
+        if (size > 0) {
+            // TODO replace selected word in wordsHeadObj with first word in wordsTailObj
             delete wordsHeadObj[key];
 
             this.setState({ wordsHeadObj });
