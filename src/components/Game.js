@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-30 07:01:54
+* @Last Modified time: 2018-05-30 22:11:13
 */
 
 import React from 'react';
@@ -132,10 +132,10 @@ class Game extends React.Component {
         }));
 
         const wordsHeadObj = this.state.wordsHeadObj;
-        const wordsTailObj = this.state.wordsTailObj;
-        const size = Object.keys(wordsTailObj).length;
-        if (size > 0) {
-            // TODO replace selected word in wordsHeadObj with first word in wordsTailObj
+        const wordsFullObj = this.state.wordsFullObj;
+        const size = Object.keys(wordsFullObj).length;
+        if (size > MAX_WORDS) {
+            // TODO replace selected word in wordsHeadObj with first word in wordsFullObj
             delete wordsHeadObj[key];
 
             this.setState({ wordsHeadObj });
