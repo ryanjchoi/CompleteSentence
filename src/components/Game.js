@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-30 22:11:13
+* @Last Modified time: 2018-06-01 19:40:07
 */
 
 import React from 'react';
@@ -44,9 +44,9 @@ class Game extends React.Component {
         const wordsTailArr = this.words.slice(MAX_WORDS);
         const wordsFullArr = wordsHeadArr.concat(wordsTailArr);
 
-        const wordsHeadObj = this.getShuffledObj(wordsHeadArr);
-        const wordsTailObj = this.getShuffledObj(wordsTailArr);
-        const wordsFullObj = this.getShuffledObj(wordsFullArr);
+        const wordsHeadObj = this.convertArrToObj(wordsHeadArr);
+        const wordsTailObj = this.convertArrToObj(wordsTailArr);
+        const wordsFullObj = this.convertArrToObj(wordsFullArr);
 
         this.setState({ wordsFullObj, wordsHeadObj, wordsTailObj });
 
@@ -78,7 +78,7 @@ class Game extends React.Component {
         clearInterval(this.intervalId);
     }
 
-    getShuffledObj = (arr) => arr.reduce((acc, cur, i) => {
+    convertArrToObj = (arr) => arr.reduce((acc, cur, i) => {
         acc[i] = cur;
         return acc;
     }, {});
