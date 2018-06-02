@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-01 20:26:01
+* @Last Modified time: 2018-06-01 20:30:08
 */
 
 import React from 'react';
@@ -44,10 +44,12 @@ class Game extends React.Component {
         const wordsTailArr = this.words.slice(MAX_WORDS);
         const wordsFullArr = wordsHeadArr.concat(wordsTailArr);
 
-        const wordsHeadObj = this.convertArrToObj(wordsHeadArr);
         const wordsFullObj = this.convertArrToObj(wordsFullArr);
+        const wordsHeadObj = this.getSubObj(wordsFullObj, 0, MAX_WORDS-1);
         const wordsTailObj = this.getSubObj(wordsFullObj, MAX_WORDS);
 
+        console.log("Ryan wordsFullObj => ", wordsFullObj);
+        console.log("Ryan wordsHeadObj => ", wordsHeadObj);
         console.log("Ryan wordsTailObj => ", wordsTailObj);
 
         this.setState({ wordsFullObj, wordsHeadObj, wordsTailObj });
