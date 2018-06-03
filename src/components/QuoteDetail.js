@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 07:02:47
+* @Last Modified time: 2018-06-03 15:39:08
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -67,12 +67,13 @@ class QuoteDetail extends React.Component {
 
     render() {
         const { quote } = this.state;
+        const initSeconds = quote.sentence.split(' ').length * 3;
 
         const gameProps = {
             key: this.state.gameId,
             sentence: quote.sentence,
             author: quote.author,
-            initialSeconds: 30,
+            initSeconds: initSeconds,
             onPlayAgain: this.resetGame,
             onNextQuote: this.loadNextQuote,
         };

@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 08:58:52
+* @Last Modified time: 2018-06-03 15:39:10
 */
 
 import React from 'react';
@@ -28,7 +28,7 @@ class Game extends React.Component {
             wordsFullObj: {},
             wordsHeadObj: {},
             wordsTailObj: {},
-            remainingSeconds: this.props.initialSeconds,
+            remainingSeconds: this.props.initSeconds,
         };
 
         this.gameStatus = 'PLAYING';
@@ -218,7 +218,7 @@ class Game extends React.Component {
 Game.propTypes = {
     sentence: propTypes.string.isRequired,
     author: propTypes.string.isRequired,
-    initialSeconds: propTypes.number.isRequired,
+    initSeconds: propTypes.number.isRequired,
     onPlayAgain: propTypes.func.isRequired,
     onNextQuote: propTypes.func.isRequired,
 };
@@ -226,7 +226,7 @@ Game.propTypes = {
 Game.defaultProps = {
     sentence: '',
     author: '',
-    initialSeconds: 0,
+    initSeconds: 0,
 };
 
 const styles = StyleSheet.create({
