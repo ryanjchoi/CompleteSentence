@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 08:58:48
+* @Last Modified time: 2018-06-03 17:45:53
 * @Project Name: Cage the phrase
 */
 
@@ -85,7 +85,7 @@ class App extends React.Component {
         }
         return (
             <View style={styles.container}>
-                <Text style={styles.header}>CompleteSentence</Text>
+                <Text style={styles.header}>Cage The Phrase</Text>
             </View>
         );
     }
