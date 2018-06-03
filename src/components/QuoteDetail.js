@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 14:35:50
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 15:39:08
+* @Last Modified time: 2018-06-03 17:27:24
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import Game from './Game';
-import * as CONSTANTS from './constants';
 import ajax from '../ajax';
 
 class QuoteDetail extends React.Component {
@@ -30,9 +29,7 @@ class QuoteDetail extends React.Component {
 
     async componentDidMount() {
         const quote = await ajax.fetchQuoteDetail(this.state.quote._id);
-        this.setState({
-            quote: quote,
-        });
+        this.setState({ quote });
     }
 
     getQuoteIndex = (quote) => {
@@ -56,7 +53,7 @@ class QuoteDetail extends React.Component {
             }
 
             quote = quotes[++this.qindex];
-            this.setState({quote});
+            this.setState({ quote });
 
             return {
                 gameId: prevState.gameId + 1,
@@ -73,7 +70,7 @@ class QuoteDetail extends React.Component {
             key: this.state.gameId,
             sentence: quote.sentence,
             author: quote.author,
-            initSeconds: initSeconds,
+            initSeconds,
             onPlayAgain: this.resetGame,
             onNextQuote: this.loadNextQuote,
         };

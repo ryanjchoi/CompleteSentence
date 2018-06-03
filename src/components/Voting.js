@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 07:04:44
+* @Last Modified time: 2018-06-03 17:33:41
 */
 
 import React from 'react';
@@ -32,39 +32,32 @@ class Voting extends React.Component {
     }
 
     increaseDisike = () => {
-        let dislikeVote = 1;
+        const dislikeVote = 1;
 
-        AsyncStorage.setItem("dislikeVote", dislikeVote.toString());
-        this.setState({
-            dislikeVote: dislikeVote
-        });
-
+        AsyncStorage.setItem('dislikeVote', dislikeVote.toString());
+        this.setState({ dislikeVote });
     }
 
     updateVoting = async (key) => {
-        var oldLikeVote;
+        let oldLikeVote;
         try {
-            oldLikeVote = parseInt(await AsyncStorage.getItem(key));
+            oldLikeVote = +(await AsyncStorage.getItem(key));
         } catch (error) {
             console.log(error);
         }
 
-        if (key === "likeVote") {
-            let likeVote = (oldLikeVote || parseInt(this.state.likeVote)) + 1;
+        if (key === 'likeVote') {
+            const likeVote = (oldLikeVote || +(this.state.likeVote)) + 1;
 
-            AsyncStorage.setItem("likeVote", likeVote.toString());
-            this.setState({
-                likeVote: likeVote
-            });
+            AsyncStorage.setItem('likeVote', likeVote.toString());
+            this.setState({ likeVote });
         }
 
-        if (key === "dislikeVote") {
-            let likeVote = (oldLikeVote || parseInt(this.state.dislikeVote)) + 1;
+        if (key === 'dislikeVote') {
+            const likeVote = (oldLikeVote || +(this.state.dislikeVote)) + 1;
 
             AsyncStorage.setItem('dislikeVote', dislikeVote.toString());
-            this.setState({
-                dislikeVote: dislikeVote
-            });
+            this.setState({ dislikeVote });
         }
     }
 

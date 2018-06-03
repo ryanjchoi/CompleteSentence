@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 15:27:50
+* @Last Modified time: 2018-06-03 17:29:23
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -24,8 +24,6 @@ class SearchBar extends React.Component {
     componentDidMount() {
         this.getSearchTerm();
     }
-
-    debouncedSearchQuotes = debounce(this.props.onSearch, 300);
 
     handleChange = (searchTerm) => {
         this.setState({ searchTerm }, () => {
@@ -49,6 +47,8 @@ class SearchBar extends React.Component {
         this.handleChange(searchTerm);
         this.setState({ searchTerm });
     }
+
+    debouncedSearchQuotes = debounce(this.props.onSearch, 300);
 
     render() {
         return (

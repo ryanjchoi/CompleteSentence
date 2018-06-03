@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 15:39:10
+* @Last Modified time: 2018-06-03 17:25:51
 */
 
 import React from 'react';
@@ -46,7 +46,7 @@ class Game extends React.Component {
         const wordsFullArr = wordsHeadArr.concat(wordsTailArr);
 
         const wordsFullObj = this.convertArrToObj(wordsFullArr);
-        const wordsHeadObj = this.getSubObj(wordsFullObj, 0, MAX_WORDS-1);
+        const wordsHeadObj = this.getSubObj(wordsFullObj, 0, MAX_WORDS - 1);
         const wordsTailObj = this.getSubObj(wordsFullObj, MAX_WORDS);
 
         this.setState({ wordsFullObj, wordsHeadObj, wordsTailObj });
@@ -80,20 +80,15 @@ class Game extends React.Component {
     }
 
     getSubObj = (obj, startIndex, endIndex) => {
-        let aObj = {};
+        const aObj = {};
         endIndex = endIndex || Object.keys(obj).length;
-        for (var i in obj) {
-            if(i >= startIndex && i <= endIndex) {
+        for (let i in obj) {
+            if (i >= startIndex && i <= endIndex) {
                 aObj[i] = obj[i];
             }
         }
         return aObj;
     }
-
-    convertArrToObj = (arr) => arr.reduce((acc, cur, i) => {
-        acc[i] = cur;
-        return acc;
-    }, {});
 
     getMergedSentence = (nextState = this.state) => {
         const defaultMessage = 'Please select words below to complete a sentence.';
@@ -138,11 +133,16 @@ class Game extends React.Component {
         return 'LOST';
     }
 
+    convertArrToObj = (arr) => arr.reduce((acc, cur, i) => {
+        acc[i] = cur;
+        return acc;
+    }, {})
+
     replaceKeyValue = (obj, key, newKey, newVal) => {
-        let aObj = {};
+        const aObj = {};
 
         for (var i in obj) {
-            if(key === i) {
+            if (key === i) {
                 aObj[newKey] = newVal;
             } else {
                 aObj[i] = obj[i];
@@ -157,12 +157,12 @@ class Game extends React.Component {
         }));
 
         let wordsHeadObj = this.state.wordsHeadObj;
-        let wordsTailObj = this.state.wordsTailObj;
-        let tailSize = Object.keys(wordsTailObj).length;
+        const wordsTailObj = this.state.wordsTailObj;
+        const tailSize = Object.keys(wordsTailObj).length;
         if (tailSize > 0) {
-            let tailKeys = Object.keys(wordsTailObj);
-            let firstTailKey = tailKeys[0];
-            let firstTailValue = wordsTailObj[firstTailKey];
+            const tailKeys = Object.keys(wordsTailObj);
+            const firstTailKey = tailKeys[0];
+            const firstTailValue = wordsTailObj[firstTailKey];
 
             delete wordsTailObj[firstTailKey];
             wordsHeadObj = this.replaceKeyValue(wordsHeadObj, key, firstTailKey, firstTailValue);
