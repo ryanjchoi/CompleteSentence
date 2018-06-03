@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-02 20:49:53
+* @Last Modified time: 2018-06-03 08:58:52
 */
 
 import React from 'react';
@@ -163,8 +163,8 @@ class Game extends React.Component {
             let tailKeys = Object.keys(wordsTailObj);
             let firstTailKey = tailKeys[0];
             let firstTailValue = wordsTailObj[firstTailKey];
-            delete wordsTailObj[firstTailKey];
 
+            delete wordsTailObj[firstTailKey];
             wordsHeadObj = this.replaceKeyValue(wordsHeadObj, key, firstTailKey, firstTailValue);
 
             this.setState({ wordsHeadObj, wordsTailObj });
