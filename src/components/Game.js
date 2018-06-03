@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-02 20:38:38
+* @Last Modified time: 2018-06-02 20:49:53
 */
 
 import React from 'react';
@@ -41,7 +41,8 @@ class Game extends React.Component {
 
     componentDidMount() {
         const wordsHeadArr = shuffle(this.words.slice(0, MAX_WORDS));
-        const wordsTailArr = this.words.slice(MAX_WORDS);
+        // TODO if wordsTailArr is larger than MAX_WORDS
+        const wordsTailArr = shuffle(this.words.slice(MAX_WORDS));
         const wordsFullArr = wordsHeadArr.concat(wordsTailArr);
 
         const wordsFullObj = this.convertArrToObj(wordsFullArr);
@@ -155,13 +156,10 @@ class Game extends React.Component {
             selectedKeys: [...prevState.selectedKeys, key],
         }));
 
-        let wordsTailObj = this.state.wordsTailObj;
         let wordsHeadObj = this.state.wordsHeadObj;
-        let wordsFullObj = this.state.wordsFullObj;
-        let size = Object.keys(wordsFullObj).length;
+        let wordsTailObj = this.state.wordsTailObj;
         let tailSize = Object.keys(wordsTailObj).length;
         if (tailSize > 0) {
-
             let tailKeys = Object.keys(wordsTailObj);
             let firstTailKey = tailKeys[0];
             let firstTailValue = wordsTailObj[firstTailKey];
