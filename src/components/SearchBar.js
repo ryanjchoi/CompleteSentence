@@ -2,19 +2,20 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-29 07:04:22
+* @Last Modified time: 2018-06-03 10:50:23
 */
 import React from 'react';
 import propTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, AsyncStorage } from 'react-native';
 
 class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
 
+        // let searchTerm = this.getSearchTerm();
         this.state = {
             searchTerm: '',
         };
@@ -26,6 +27,24 @@ class SearchBar extends React.Component {
         this.setState({ searchTerm }, () => {
             this.debouncedSearchQuotes(this.state.searchTerm);
         });
+
+        this.saveSearchTerm(searchTerm);
+    }
+
+    saveSearchTerm = (searchTerm) => {
+        AsyncStorage.setItem('searchTerm', searchTerm);
+    }
+
+    getSearchTerm = async () => {
+        let searchTerm = '';
+        try {
+            searchTerm = await AsyncStorage.getItem('searchTerm');
+        } catch (error) {
+            console.log(error);
+        }
+
+        return searchTerm;
+
     }
 
     render() {
