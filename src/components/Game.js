@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-03-31 10:16:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-01 20:30:08
+* @Last Modified time: 2018-06-02 20:38:38
 */
 
 import React from 'react';
@@ -48,10 +48,6 @@ class Game extends React.Component {
         const wordsHeadObj = this.getSubObj(wordsFullObj, 0, MAX_WORDS-1);
         const wordsTailObj = this.getSubObj(wordsFullObj, MAX_WORDS);
 
-        console.log("Ryan wordsFullObj => ", wordsFullObj);
-        console.log("Ryan wordsHeadObj => ", wordsHeadObj);
-        console.log("Ryan wordsTailObj => ", wordsTailObj);
-
         this.setState({ wordsFullObj, wordsHeadObj, wordsTailObj });
 
         this.intervalId = setInterval(() => {
@@ -82,11 +78,11 @@ class Game extends React.Component {
         clearInterval(this.intervalId);
     }
 
-    getSubObj = (obj, sIdx, eIdx) => {
+    getSubObj = (obj, startIndex, endIndex) => {
         let aObj = {};
-        eIdx = eIdx || Object.keys(obj).length;
+        endIndex = endIndex || Object.keys(obj).length;
         for (var i in obj) {
-            if(i >= sIdx && i <= eIdx) {
+            if(i >= startIndex && i <= endIndex) {
                 aObj[i] = obj[i];
             }
         }
@@ -141,19 +137,39 @@ class Game extends React.Component {
         return 'LOST';
     }
 
+    replaceKeyValue = (obj, key, newKey, newVal) => {
+        let aObj = {};
+
+        for (var i in obj) {
+            if(key === i) {
+                aObj[newKey] = newVal;
+            } else {
+                aObj[i] = obj[i];
+            }
+        }
+        return aObj;
+    }
+
     selectWord = (key) => {
         this.setState((prevState) => ({
             selectedKeys: [...prevState.selectedKeys, key],
         }));
 
-        const wordsHeadObj = this.state.wordsHeadObj;
-        const wordsFullObj = this.state.wordsFullObj;
-        const size = Object.keys(wordsFullObj).length;
-        if (size > MAX_WORDS) {
-            // TODO replace selected word in wordsHeadObj with first word in wordsFullObj
-            delete wordsHeadObj[key];
+        let wordsTailObj = this.state.wordsTailObj;
+        let wordsHeadObj = this.state.wordsHeadObj;
+        let wordsFullObj = this.state.wordsFullObj;
+        let size = Object.keys(wordsFullObj).length;
+        let tailSize = Object.keys(wordsTailObj).length;
+        if (tailSize > 0) {
 
-            this.setState({ wordsHeadObj });
+            let tailKeys = Object.keys(wordsTailObj);
+            let firstTailKey = tailKeys[0];
+            let firstTailValue = wordsTailObj[firstTailKey];
+            delete wordsTailObj[firstTailKey];
+
+            wordsHeadObj = this.replaceKeyValue(wordsHeadObj, key, firstTailKey, firstTailValue);
+
+            this.setState({ wordsHeadObj, wordsTailObj });
         }
     }
 
