@@ -2,22 +2,29 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-01 10:38:54
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 17:45:53
+* @Last Modified time: 2018-06-06 06:47:45
 * @Project Name: Cage the phrase
 */
 
 import React from 'react';
 import propTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Animated,
+    Easing,
+} from 'react-native';
 import ajax from '../ajax';
 import QuoteList from './QuoteList';
 import QuoteDetail from './QuoteDetail';
 import SearchBar from './SearchBar';
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
+
+        this.titleXPos = new Animated.Value(0);
 
         this.state = {
             quotes: [],
@@ -25,7 +32,22 @@ class App extends React.Component {
         };
     }
 
+    animateTitle = (direction = 1) => {
+        Animated.timing(
+            this.titleXPos, {
+                toValue: direction * 30,
+                duration: 1000 ,
+                easing: Easing.easy,
+        }).start(({ finished }) => {
+            if (finished) {
+                this.animateTitle(-1 * direction);
+            }
+        });
+    }
+
     async componentDidMount() {
+
+        this.animateTitle();
         const quotes = await ajax.fetchQuotes();
         this.setState({ quotes });
     }
@@ -84,9 +106,9 @@ class App extends React.Component {
             );
         }
         return (
-            <View style={styles.container}>
+            <Animated.View style={[{left: this.titleXPos}, styles.container]}>
                 <Text style={styles.header}>Cage The Phrase</Text>
-            </View>
+            </Animated.View>
         );
     }
 }
