@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-07 06:46:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-04-16 12:51:29
+* @Last Modified time: 2018-06-15 06:38:26
 */
 
 export const QUOTES = [
@@ -14,7 +14,6 @@ export const QUOTES = [
         category: "inspiration",
         voting: {
             like: 0,
-            dislike: 0,
         },
         view: 1,
     },
