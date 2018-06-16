@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 19:53:01
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-15 06:39:14
+* @Last Modified time: 2018-06-16 16:14:44
 */
 
 import React from 'react';
@@ -27,10 +27,22 @@ class Voting extends React.Component {
     }
 
     componentDidMount() {
-
+        this.displayLikeVote('likeVote');
     }
 
-    updateVoting = async (key) => {
+    displayLikeVote = async (key) => {
+        let likeVote;
+        try {
+            likeVote = +(await AsyncStorage.getItem(key));
+            console.log("Ryan likeVote => ", likeVote);
+        } catch (error) {
+            console.log(error);
+        }
+
+        this.setState({ likeVote });
+    }
+
+    updateLikeVote = async (key) => {
         let oldLikeVote;
         try {
             oldLikeVote = +(await AsyncStorage.getItem(key));
@@ -49,7 +61,7 @@ class Voting extends React.Component {
     render() {
         return (
             <View style={styles.voteContainer}>
-                <TouchableOpacity onPress={() => this.updateVoting('likeVote')}>
+                <TouchableOpacity onPress={() => this.updateLikeVote('likeVote')}>
                     <Image
                         source={require('../../assets/images/icons8-thumbs-up-50.png')}
                         style={this.like}

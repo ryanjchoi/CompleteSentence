@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-04-15 20:48:15
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-05-18 15:34:20
+* @Last Modified time: 2018-06-16 16:05:12
 */
 
 const Hapi = require('hapi');
@@ -11,12 +11,20 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/CompleteSentence');
 // const db = mongoose.connection;
 
+// QuoteTask
 const quoteSchema = mongoose.Schema({
     author: String,
     sentence: String
 });
+const QuoteTask = mongoose.model('quotes', quoteSchema);
 
-const Task = mongoose.model('quotes', quoteSchema);
+// VoteTask
+const voteSchema = mongoose.Schema({
+    quoteId: String,
+    userId: String
+});
+const VoteTask = mongoose.model('vote', voteSchema);
+
 
 const server = new Hapi.Server();
 server.connection({ port: 3000 });
@@ -37,7 +45,7 @@ server.route([
         method: 'GET',
         path: '/api/v1/quotes',
         handler: (request, reply) => {
-            const result = Task.find().limit(LIMIT);
+            const result = QuoteTask.find().limit(LIMIT);
             result.exec((err, tasks) => {
                 reply(tasks);
             });
@@ -50,9 +58,28 @@ server.route([
         path: '/api/v1/quotes/id/{id}',
         handler: (request, reply) => {
             const id = request.params.id;
-            const result = Task.findOne({
+            const result = QuoteTask.findOne({
                 _id: id
             });
+            result.exec((err, quote) => {
+                if (quote) {
+                    reply(quote);
+                } else {
+                    reply().code(404);
+                }
+            });
+        }
+    },
+
+    // Get vote count by id
+    {
+        method: 'GET',
+        path: '/api/v1/vote/id/{id}',
+        handler: (request, reply) => {
+            const id = request.params.id;
+            const result = VoteTask.find({
+                _id: id
+            }).count();
             result.exec((err, quote) => {
                 if (quote) {
                     reply(quote);
@@ -72,7 +99,7 @@ server.route([
             if (author.length < 3) {
                 //TODO: add some logic here
             }
-            const result = Task.find({
+            const result = QuoteTask.find({
                 author: { $regex: new RegExp(author) }
             }).sort({ author: 1 }).limit(LIMIT);
             result.exec((err, quote) => {
@@ -94,7 +121,7 @@ server.route([
             if (keyword.length < 3) {
                 //TODO: add some logic here
             }
-            const result = Task.find({
+            const result = QuoteTask.find({
                 sentence: { $regex: new RegExp(keyword) }
             }).limit(LIMIT);
             result.exec((err, quote) => {
@@ -111,11 +138,11 @@ server.route([
         method: 'POST',
         path: '/api/v1/quotes',
         handler: (request, reply) => {
-            const newTask = new Task({
+            const newQuoteTask = new QuoteTask({
                 author: request.payload.author,
                 sentence: request.payload.sentence
             });
-            newTask.save((err, task) => {
+            newQuoteTask.save((err, task) => {
                 reply(task).code(201);
             });
         }
@@ -130,7 +157,7 @@ server.route([
                 sentence: request.payload.sentence,
                 author: request.params.author
             };
-            Task.findOneAndUpdate(
+            QuoteTask.findOneAndUpdate(
                 { _id: request.params.id },
                 updateData,
                 { new: true },
@@ -146,7 +173,7 @@ server.route([
         method: 'DELETE',
         path: '/api/v1/quotes/id/{id}',
         handler: (request, reply) => {
-            Task.findOneAndRemove(
+            QuoteTask.findOneAndRemove(
             { _id: request.params.id },
             (err, response) => {
                 reply().code(204);
