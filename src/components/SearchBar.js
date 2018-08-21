@@ -2,7 +2,7 @@
 * @Author: Ryan Choi
 * @Date:   2018-05-05 06:44:43
 * @Last Modified by:   Ryan Choi
-* @Last Modified time: 2018-06-03 17:29:23
+* @Last Modified time: 2018-08-20 21:43:04
 */
 import React from 'react';
 import propTypes from 'prop-types';
@@ -41,11 +41,14 @@ class SearchBar extends React.Component {
         let searchTerm = '';
         try {
             searchTerm = await AsyncStorage.getItem('searchTerm');
+            console.log("Ryan searchTerm => ", searchTerm);
         } catch (error) {
             console.log(error);
         }
         this.handleChange(searchTerm);
-        this.setState({ searchTerm });
+        if (searchTerm !== '') {
+            this.setState({ searchTerm });
+        }
     }
 
     debouncedSearchQuotes = debounce(this.props.onSearch, 300);
